@@ -21,6 +21,7 @@ class SuperAdminRegisterController extends Controller
             'name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:super_admins'],
             'password' => ['required', 'string', 'min:8'],
+            'password_confirmation' => 'required|min:8|same:password'
         ]);
     }
 
@@ -35,7 +36,7 @@ class SuperAdminRegisterController extends Controller
         $data = $request->except("_token");
         $super_admin_data = SuperAdmin::create([
             'name' => $data['name'],
-            'role' => 0,
+            'role' => $data['role'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
