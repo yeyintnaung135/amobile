@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\super_admin\SuperAdminController;
+use App\Http\Controllers\backend\BannerController;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\frontend\FrontController;
 
 /*
@@ -46,5 +48,26 @@ Route::group(['prefix'=>'store-admin','as'=>'store_admin.'],function(){
     Route::post('/login', [App\Http\Controllers\Auth\super_admin\SuperAdminLoginController::class, 'login'])->name('login');
     Route::get('/logout', [App\Http\Controllers\Auth\super_admin\SuperAdminLoginController::class, 'logout'])->name('logout');
     Route::post('/register', [App\Http\Controllers\Auth\super_admin\SuperAdminRegisterController::class, 'create'])->name('create');
+
+    Route::group(['middleware'=>['auth:super_admin']],function(){
+        Route::controller(ProductController::class)->group(function(){
+            Route::get('/product/creat','create')->name('product.create');
+            Route::post('/product/store','store')->name('product.store');
+            
+            Route::get('/product/creat','create')->name('product.create');
+            // Route::get('/users/create','create')->name('user.create');
+        });
+    });
+
+    Route::group(['middleware'=>['auth:super_admin']],function(){
+        Route::controller(BannerController::class)->group(function(){
+            Route::get('/banner/all','index')->name('banner.all');
+            Route::get('/banner/create','create')->name('banner.create');
+            Route::get('/banner/edit/{id}','edit')->name('banner.edit');
+            Route::post('/banner/store','store')->name('banner.store');
+            Route::put('/banner/update/{id}','update')->name('banner.update');
+            Route::get('/banner/delete/{id}','delete')->name('banner.delete');
+        });
+    });
 });
 
