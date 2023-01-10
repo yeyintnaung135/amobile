@@ -18,19 +18,19 @@
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
         <link rel="stylesheet" href="{{asset('css/fancybox.css')}}">
         <link rel="stylesheet" href="{{asset('css/swiper-bundle.min.css')}}">
-
         <!-- Styles -->
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
                 background: #fff !important;
             }
-            #navbar {
-              position: relative !important;
-            }
             a{
                 text-decoration: none;
                 color: #000;
+            }
+
+            .top{
+                height: 95px;
             }
 
             .footer{
@@ -49,10 +49,9 @@
         @stack('style')
     </head>
     <body>
-
-        @include('frontend.layout.navbar')
-
-
+        <div class="top">
+           @include('frontend.layout.navbar')
+        </div>
         <main class="container-fluid mb-5">
            @yield('content')
         </main>

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white d-flex justify-content-between" id="navbar">
-  <div class="nav-row d-lg-flex w-100">
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-center" id="navbar">
+  <div class="nav-row d-lg-flex">
      <div class="d-flex justify-content-between">
        <div class="d-flex mobile-flex">
        <button class="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="ml-1 text-center" href="{{ url('/') }}">Home</a>
+          <a class="ml-1 text-center" href="/">Home</a>
         </li>
         <li class="nav-item">
            <a class="ml-1 text-center" href="{{ url('/products') }}">Product</a>
