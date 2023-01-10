@@ -28,6 +28,9 @@ Route::get('/products', [App\Http\Controllers\frontend\ProductController::class,
 
 Route::get('/product_detail/{product_id}', [App\Http\Controllers\frontend\ProductController::class, 'product_detail'])->name('product_detail');
 
+Route::get('/news', [App\Http\Controllers\frontend\NewsController::class, 'news']);
+Route::get('/contact', [App\Http\Controllers\frontend\ContactController::class, 'contact']);
+
 /**  Frontend Group  **/
 Route::controller(FrontController::class)->group(function(){
     Route::get('/','index')->name('dashboard')->name('front');
