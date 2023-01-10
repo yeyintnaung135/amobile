@@ -326,8 +326,8 @@
   </div>
 </section>
 @endsection
-@push('scripts')
-  <script>
+@push('script')
+<script>
   window.addEventListener('load', function () {
     var swiper = new Swiper(".productDetailSwiperthumb", {
         loop: false,
@@ -360,3 +360,4 @@
   })
   </script>
 @endpush
+
