@@ -16,13 +16,18 @@
 
         <!-- app -->
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
+        <link rel="stylesheet" href="{{asset('css/fancybox.css')}}">
+        <link rel="stylesheet" href="{{asset('css/swiper-bundle.min.css')}}">
 
         <!-- Styles -->
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
+                background: #fff !important;
             }
-
+            #navbar {
+              position: relative !important;
+            }
             a{
                 text-decoration: none;
                 color: #000;
@@ -91,8 +96,13 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
+    <!-- jQuery -->
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <script src="{{ asset('js/app.js')}}"></script>
+    <script src="{{ asset('js/fancybox.js')}}"></script>
+    <script src="{{ asset('js/swiper-bundle.min.js')}}"></script>
     @stack('script')
     <script>
         window.onscroll = function() {scrollFunction()};
@@ -107,6 +117,34 @@
     
             }
         }
+        var swiper = new Swiper(".productDetailSwiperthumb", {
+            loop: false,
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: false,
+            watchSlidesProgress: true,
+        });
+        var swiper2 = new Swiper(".productDetailSwiper", {
+            loop: false,
+            spaceBetween: 10,
+            thumbs: {
+                swiper: swiper,
+            },
+        });
+        var quantitiy=0;
+        $('.quantity-right-plus').click(function(e){ 
+          e.preventDefault();
+          var quantity = parseInt($('#quantity').val());
+          $('#quantity').val(quantity + 1);
+        });
+
+        $('.quantity-left-minus').click(function(e){
+          e.preventDefault();
+          var quantity = parseInt($('#quantity').val());
+          if(quantity>0){
+            $('#quantity').val(quantity - 1);
+          }
+        });
     </script>
    
 </html>
