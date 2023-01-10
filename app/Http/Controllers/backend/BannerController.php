@@ -30,7 +30,7 @@ class BannerController extends Controller
         $banner->image = 'images/banner/' . $newFileName;
         $banner->save();
 
-        return redirect()->back();
+        return redirect('store-admin/banner/all')->with('success','Banner Create Successfully');
         
     }
 
