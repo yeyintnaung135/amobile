@@ -1,12 +1,15 @@
 <!-- Swiper -->
 <div class="swiper mySwiper rounded-1">
   <div class="swiper-wrapper">
-    <div class="swiper-slide">
-      <img src="{{ asset('images/banner/example-banner-1.png')}}" class="w-100" alt="">
-    </div>
-    <div class="swiper-slide">
-      <img src="{{ asset('images/banner/example-banner-2.jpeg')}}" class="w-100" alt="">
-    </div>
+     @forelse ($banner as $b )
+     <div class="swiper-slide">
+       <img src="{{ asset($b->image)}}" class="w-100" alt="">
+     </div>
+     @empty
+      <div class="swiper-slide">
+          <h3>There is No Banner </h3>
+       </div>
+     @endforelse
   </div>
   <div class="swiper-pagination"></div>
 </div>

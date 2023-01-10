@@ -18,80 +18,45 @@
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
         <link rel="stylesheet" href="{{asset('css/fancybox.css')}}">
         <link rel="stylesheet" href="{{asset('css/swiper-bundle.min.css')}}">
-
         <!-- Styles -->
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
                 background: #fff !important;
             }
-            #navbar {
-              position: relative !important;
-            }
             a{
                 text-decoration: none;
                 color: #000;
             }
-            .swiper {
-              width: 100%;
-              height: 500px;
-            }
-            .swiper-slide {
-                text-align: center;
-                font-size: 18px;
-                background: #fff;
 
-                /* Center slide text vertically */
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                -webkit-justify-content: center;
+            .top{
+                height: 95px;
+            }
+
+            .footer{
+                height: 400px;
+                background-color: #101d30;
+                display:flex;
                 justify-content: center;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                -webkit-align-items: center;
-                align-items: center;
             }
-
-            .swiper-slide img{
-                object-fit: contain;
+            .footer-inner{
+                justify-content: center;
+                /* width: 20%; */
+                text-align: center;
+                color:#fff;
             }
-
-            .swiper-slide img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .swiper-pagination-bullet-active {
-                background-color: #000 !important;
-            }
-
-/* Add responsiveness - on screens less than 580px wide, display the navbar vertically instead of horizontally */
-@media screen and (max-width: 991px) {
-    .swiper {
-        width: 100%;
-        height: 300px;
-    }
-} 
-
-
-
         </style>
         @stack('style')
     </head>
     <body>
-
-        @include('frontend.layout.navbar')
-
-
-        <main class="container-fluid">
+        <div class="top">
+           @include('frontend.layout.navbar')
+        </div>
+        <main class="container-fluid mb-5">
            @yield('content')
         </main>
+
+        @include('frontend.layout.footer')
     </body>
 
     <!-- Swiper JS -->

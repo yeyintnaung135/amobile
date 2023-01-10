@@ -92,51 +92,15 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/UI/general.html" class="nav-link">
+                  <a href="{{ route('store_admin.banner.all')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>General</p>
+                    <p>Lists</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
+                  <a href="{{ route('store_admin.banner.create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Icons</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/buttons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Buttons</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/sliders.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Sliders</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/modals.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Modals & Alerts</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/navbar.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Navbar & Tabs</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/timeline.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Timeline</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/ribbons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ribbons</p>
+                    <p>Create</p>
                   </a>
                 </li>
               </ul>
@@ -151,20 +115,14 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="pages/charts/chartjs.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Create Category</p>
-                  </a>
-                </li>
                 <li class="nav-item">
-                  <a href="pages/charts/chartjs.html" class="nav-link">
+                  <a href="" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>All Products</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/charts/flot.html" class="nav-link">
+                  <a href="{{ route('store_admin.product.create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add Products</p>
                   </a>
