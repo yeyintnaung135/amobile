@@ -34,12 +34,12 @@ class SuperAdminRegisterController extends Controller
             return redirect()->back()->withErrors($valid)->withInput();
         }
         $data = $request->except("_token");
-        $super_admin_data = SuperAdmin::create([
+        SuperAdmin::create([
             'name' => $data['name'],
             'role' => $data['role'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        return redirect()->route('store_admin.dashboard');
+        return redirect()->route('store_admin.users.list');
     }
 }
