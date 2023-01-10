@@ -26,6 +26,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/products', [App\Http\Controllers\frontend\ProductController::class, 'products'])->name('products');
+
+Route::get('/product_detail/{product_id}', [App\Http\Controllers\frontend\ProductController::class, 'product_detail'])->name('product_detail');
 
 /**  Frontend Group  **/
 Route::controller(FrontController::class)->group(function(){
