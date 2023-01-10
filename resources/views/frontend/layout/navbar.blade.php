@@ -29,10 +29,10 @@
            <a class="ml-1 text-center" href="{{ url('/products') }}">Product</a>
         </li>
         <li class="nav-item">
-           <a class="ml-1 text-center" href="#contact">News</a>
+           <a class="ml-1 text-center" href="{{ url('/news') }}">News</a>
         </li>
         <li class="nav-item">
-           <a class="ml-1 text-center" href="#contact">Contact</a>
+           <a class="ml-1 text-center" href="{{ url('/contact') }}">Contact</a>
         </li>
         
         <!-- <li class="nav-item dropdown">

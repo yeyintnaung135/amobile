@@ -45,7 +45,7 @@
     font-weight: 600;
   }
   .product-title span {
-    color: #54e18d;
+    color: #101d30;
   }
   .sn-specific-product h4 {
     font-weight: 600;
@@ -104,6 +104,35 @@
     color: #fff;
     padding: 30px;
     border-radius: 10px;
+    position: relative;
+    padding: 70px;
+  }
+  .dis-banner h3 {
+    width: 100%;
+    margin-left: 6%;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  .dis-banner .sn-phone-image {
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    right: 320px;
+  }
+  .dis-banner .sn-phone-image img {
+    width: 75px;
+  }
+  .dis-banner .sn-phone-brand {
+    position: absolute;
+    top: 43%;
+    right: 50px;
+  }
+  .dis-banner .sn-phone-brand img{
+    width: 35px;
+    margin-left: 15px;
+  }
+  .realme {
+    width: 115px !important;
   }
   
   /* Tablet */
@@ -115,6 +144,28 @@
     .sn-specific-product h4 {
       font-size: 18px;
     }
+    .dis-banner {
+      padding-top: 50px;
+      padding-bottom: 80px;
+    }
+    .dis-banner h3 {
+      margin-left: 3%;
+    }
+    .dis-banner .sn-phone-brand {
+      left: 70px;
+      right: auto;
+      top: 58%;
+    }
+    .dis-banner .sn-phone-image {
+      right: 75px;
+    }
+    .dis-banner .sn-phone-brand img {
+      width: 25px;
+    }
+    .realme {
+      width: 85px !important;
+    }
+    
   }
 
   /* Mobile */
@@ -123,6 +174,32 @@
       padding: 6px 16px;
       margin-left: 10px;
       font-size: 15px;
+    }
+    .dis-banner {
+      padding: 40px 0 70px 0;
+    }
+    .dis-banner h3 {
+      margin-left: 5%;
+      font-size: 18px;
+    }
+    .dis-banner .sn-phone-brand {
+      left: 13px;
+      right: auto;
+      top: 56%;
+    }
+    .dis-banner .sn-phone-image {
+      right: 10px;
+      top: 15%;
+    }
+    .dis-banner .sn-phone-image img {
+      width: 50px;
+    }
+    .dis-banner .sn-phone-brand img {
+      width: 18px;
+      margin-left: 5px;
+    }
+    .realme {
+      width: 65px !important;
     }
   }
 </style>
@@ -198,8 +275,18 @@
     </div>
 
     <div class="my-3 dis-banner">
-      <div class="d-flex">
+      <div class="">
         <h3 class="mb-0">UP to 10% OFF</h3>
+        <div class="d-flex justify-content-end align-items-end align-self-end sn-phone-image">
+          <img src="{{ asset('images/banner/image1.png')}}" alt="" class="">
+          <img src="{{ asset('images/banner/image 2.png')}}" alt="" class="">
+          <img src="{{ asset('images/banner/image 3.png')}}" alt="" class="">
+        </div>
+        <div class="d-flex justify-content-end align-items-end align-self-end sn-phone-brand">
+          <img src="{{ asset('images/banner/apple.png')}}" alt="" class="">
+          <img src="{{ asset('images/banner/realme.png')}}" alt="" class="realme">
+          <img src="{{ asset('images/banner/Mi.png')}}" alt="" class="">
+        </div>
       </div>
     </div>
 
