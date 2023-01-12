@@ -8,9 +8,11 @@
           <span class="toggler-icon bottom-bar"></span>
        </button>
         <div id="logo" class="mx-4">
-            <img src="{{ asset('images/logos/admin.png')}}" alt="" class="logo">
+            <img src="{{ asset('images/logos/logo.png')}}" alt="" class="logo">
         </div>
-        <h3 class="mt-2 logo-title font-weight-bolder ">A-Mobile</h3>
+        <h3 class="mt-2 logo-title font-weight-bolder ">
+          A-Mobile
+        </h3>
        </div>
        <div id="navbar-right-mobile">
         <a class="" href="#contact"><i class="fas fa-search"></i></a>

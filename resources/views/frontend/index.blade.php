@@ -13,7 +13,7 @@
        }
 
        .tab-inner-width{
-         width: 25%;
+         width: 15%;
        }
 
 
@@ -51,10 +51,7 @@
 
         /* Style the tab content */
         .tabcontent {
-        
-        padding: 6px 12px;
-        /* border: 1px solid #ccc; */
-        border-top: none;
+          border-top: none;
         }
         .tabcontent-2{
             display: none;
@@ -108,6 +105,10 @@
             align-items: center;
             color: #ffffff;
             cursor: pointer;
+        }
+
+        .price{
+            font-size: 20px;
         }
 
         .ads{
@@ -164,6 +165,7 @@
             }
             .tab-inner-width{
                 width: 100%;
+                /* border:1px solid red; */
             }
             .tab .tablinks {
                 width: 100px;
@@ -347,238 +349,137 @@
        <div class="col-lg-12 col-12 px-3 px-lg-5">
           @include('frontend.layout.swiper_slider.slider')
           <div class="row sub-title">
-            <div class="col-12 py-3">
-                <div class="px-1 d-flex justify-content-between align-items-lg-center ">
+            <div class="col-12 py-lg-3 p-1">
+                <div class="px-lg-1 d-flex justify-content-between align-items-lg-center ">
                    <div class="sub-title-inner-width d-block d-lg-flex justify-content-between align-items-center ">
                     <h3 class="mb-3 mb-lg-0 font-weight-bolder">Our New Arrivals</h3>
-                    <div class="tab p-lg-2 tab-inner-width d-lg-flex justify-content-around mt-2"> 
+                    <div class="tab p-lg-2 tab-inner-width d-lg-flex justify-content-between mt-2"> 
                         <div class="tablinks rounded-4 active" onclick="opemTab(event, 'Phone')">Phone</div>
                         <div class="tablinks rounded-4 " onclick="opemTab(event, 'Laptop')">Laptop</div>
                     </div>
-                    
                    </div>
-                   <a href="http://" class="font-weight-bolder">See All</a>
+                   <a href="http://" class="font-weight-bolder ">See All</a>
                 </div>
             </div>
           </div>
-          <div class="row new-arrivals-product mb-5">
-            <div class="col-12 py-3">
+          <div class="row new-arrivals-product mb-lg-5 p-0">
+            <div class="col-12 p-lg-0 p-1">
                 <div id="Phone" class="tabcontent">
                    <div class="row">
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
+                    @forelse ($new_arrival_phones as $p)
+                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
                         <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
+                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 text-center">
+                                <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
                                 <i class="far fa-heart"></i>
-                            </div>
+                            </a>
                             <div class="card-body p-2">
                             <div class="row p-lg-2">
                                 <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
+                                    <h4>{{ $p->title }}</h4>
+                                    <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
                                     </div>
                                     <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
                                     <div class="my-cart">
                                         <div class="d-flex  align-items-center">
                                           <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
                                         </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
+                                    </div> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                    @empty
+                        <div class="w-100 d-flex justify-content-center align-items-center">
+                            <h1>There is No Product</h1>
                         </div>
-                    </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                    </div>
                 </div>
-
                 <div id="Laptop" class="tabcontent tabcontent-2">
-
+                  <div class="row">
+                    @forelse ($new_arrival_laptops as $p)
+                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
+                        <div class="card rounded-3">
+                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 ">
+                                <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <div class="card-body p-2">
+                            <div class="row p-lg-2">
+                                <div class="col-lg-6 col-7">
+                                    <h4>{{ $p->title }}</h4>
+                                    <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                    </div>
+                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
+                                    <div class="my-cart">
+                                        <div class="d-flex  align-items-center">
+                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                    </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                        <div class="w-100 d-flex justify-content-center align-items-center">
+                            <h1>There is No laptop</h1>
+                        </div>
+                    @endforelse
+                   </div>
                 </div>
-              
             </div>
           </div>
           <div class="row sub-title">
-            <div class="col-12 py-3">
-                <div class="px-1 d-flex justify-content-between align-items-lg-center ">
+            <div class="col-12 py-lg-3 p-1 p-lg-2">
+                <div class="px-lg-1 p-0 d-flex justify-content-between align-items-lg-center ">
                    <div class="sub-title-inner-width d-block d-lg-flex justify-content-between align-items-center ">
                     <h3 class="mb-3 mb-lg-0 font-weight-bolder">Grab the best deals on <span class="text-info">Smartphones</span></h3>
-                  
-                    
                    </div>
                    <a href="http://" class="font-weight-bolder">See All</a>
                 </div>
             </div>
           </div>
           <div class="row smart-phone">
-            <div class="col-12 py-3">
+            <div class="col-12 p-lg-0 p-1">
                   <div class="row">
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
+                  @forelse ($phones as $p)
+                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
                         <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
+                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 text-center">
+                                <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
                                 <i class="far fa-heart"></i>
-                            </div>
+                            </a>
                             <div class="card-body p-2">
                             <div class="row p-lg-2">
                                 <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
+                                    <h4>{{ $p->title }}</h4>
+                                    <span class="text-info font-weight-bolder price">${{$p->price}}</span>
                                     </div>
                                     <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
                                     <div class="my-cart">
                                         <div class="d-flex  align-items-center">
                                           <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
                                         </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
+                                    </div> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                    @empty
+                        <div class="w-100 d-flex justify-content-center align-items-center">
+                            <h1>There is No Product</h1>
                         </div>
-                    </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                    </div>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-12 p-lg-4 ">
+            <div class="col-12 p-lg-2 p-1 ">
                 <div class="ads">
                     <div class="row ads-title-inner">
                          <div class="col-lg-4 col-5 d-flex justify-content-center align-items-center">
@@ -608,7 +509,7 @@
           </div>
 
           <div class="row sub-title">
-            <div class="col-12 py-3">
+            <div class="col-12 py-lg-3 p-1 p-lg-2">
                 <div class="px-1 d-flex justify-content-between align-items-lg-center ">
                    <div class="sub-title-inner-width d-block d-lg-flex justify-content-between align-items-center ">
                     <h3 class="mb-3 mb-lg-0 font-weight-bolder">Our rustable <span class="text-info">Laptops</span></h3>
@@ -617,104 +518,39 @@
                 </div>
             </div>
           </div>
-          <div class="row smart-phone">
-            <div class="col-12 py-3">
-                <div class="">
+          <div class="row laptop">
+            <div class="col-12 p-lg-0 p-1">
                   <div class="row">
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
+                  @forelse ($laptops as $p)
+                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
                         <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
+                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 ">
+                                <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
                                 <i class="far fa-heart"></i>
-                            </div>
+                            </a>
                             <div class="card-body p-2">
                             <div class="row p-lg-2">
                                 <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
+                                    <h4>{{ $p->title }}</h4>
+                                    <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
                                     </div>
                                     <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
                                     <div class="my-cart">
                                         <div class="d-flex  align-items-center">
                                           <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
                                         </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
+                                    </div> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                    @empty
+                        <div class="w-100 d-flex justify-content-center align-items-center">
+                            <h1>There is No laptop</h1>
                         </div>
-                    </div>
-                    <div class="col-6 mb-2 p-1 col-xl-3 card-height d-flex justify-content-center">
-                        <div class="card rounded-3">
-                            <div class="card-header border-0 p-0">
-                                <img src="{{ asset('images/products/product-laptop.jpg')}}" alt="" class="w-100 rounded-3">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <div class="card-body p-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h4>Samsung Galaxy Z Fold</h4>
-                                    $2500
-                                    </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   </div>
-                </div>
+                    @endforelse
+                 </div>
             </div>
           </div>
        </div>

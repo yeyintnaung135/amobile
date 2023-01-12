@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
 
    <!-- Fonts -->
@@ -29,7 +30,22 @@
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+  <!-- drop zone  -->
+  <link rel="stylesheet" href="{{ asset('plugins/dropzone/dropzone.css')}}">
+
+ 
 </head>
+<style>
+    body {
+        background: rgb(243, 244, 245);
+        height: 100%;
+        color: rgb(100, 108, 127);
+        line-height: 1.4rem;
+        font-family: Roboto, "Open Sans", sans-serif;
+        font-weight: 300;
+        text-rendering: optimizeLegibility;
+    }
+</style>
 @stack('style')
 <style>
     a{
@@ -65,9 +81,9 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
+<!-- <script>
   $.widget.bridge('uibutton', $.ui.button)
-</script>
+</script> -->
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- DataTables  & Plugins -->
@@ -105,9 +121,13 @@
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="{{asset('dist/js/demo.js')}}"></script> -->
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!-- <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> -->
+
+
+<script src="{{asset('plugins/dropzone/dropzone.js')}}"></script>
+
+
 @stack('script')
+<script>
+    
+</script>
 </html>

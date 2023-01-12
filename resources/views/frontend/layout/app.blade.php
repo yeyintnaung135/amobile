@@ -29,21 +29,47 @@
                 color: #000;
             }
 
+            .font-weight-bolder{
+                font-weight: 900;
+            }
+
             .top{
-                height: 95px;
+                height: 85px;
+                /* background-color: #000; */
             }
 
             .footer{
                 height: 400px;
                 background-color: #101d30;
+                background-image: url("{{ asset('images/logos/footer-1.png')}}");
+                background-position:bottom;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                /* background-repeat: repeat-x; */
                 display:flex;
                 justify-content: center;
+               
             }
+
             .footer-inner{
                 justify-content: center;
                 /* width: 20%; */
                 text-align: center;
                 color:#fff;
+            }
+            /* .mybg{
+                background-image: url("{{ asset('images/logos/footer-bg.png')}}");
+            } */
+
+            @media screen and (max-width: 564px) {
+                .footer{
+                    height: 250px;
+                    background-color: #101d30;
+                    background-image: url("{{ asset('images/logos/footer-1.png')}}");
+                    background-position: bottom;
+                    background-size: 100% 50%;
+                    background-repeat: no-repeat;
+                }
             }
         </style>
         @stack('style')
@@ -74,10 +100,10 @@
 
         function scrollFunction() {
             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                document.getElementById("navbar").style.padding = "25px 10px";
+                document.getElementById("navbar").style.height = "100px";
                 document.getElementById("logo").style.padding = "1px";
             } else {
-                document.getElementById("navbar").style.padding = "20px 10px";
+                document.getElementById("navbar").style.height = "90px";
                 document.getElementById("logo").style.padding = "5px";
     
             }
