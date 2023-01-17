@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\traid\FileUpload;
+use App\Http\Controllers\traid\UserRole;
 
 class ProductController extends Controller
 {
-    use FileUpload;
+    use UserRole, FileUpload;
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +20,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('getProductPhotos')->latest()->paginate(10);
-        // return $products;
-        return view('backend.products.all',compact('products'));
+        if($this->isSuperAdmin() || $this->isStaff()){
+            $products = Product::with('getProductPhotos')->latest()->paginate(10);
+            return view('backend.products.all',compact('products'));
+        }
+        
     }
 
     /**
@@ -31,7 +34,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.products.create');
+        if($this->isSuperAdmin() || $this->isStaff()){
+            return view('backend.products.create');
+        }
     }
 
     /**
@@ -106,8 +111,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('backend.products.edit',compact('product'));
+        if($this->isSuperAdmin() || $this->isStaff()){
+            $product = Product::findOrFail($id);
+            return view('backend.products.edit',compact('product'));
+        }
+        
     }
 
     /**
@@ -190,7 +198,7 @@ class ProductController extends Controller
             //     }
                
             // }
-            $f->delete();
+            $f->forceDelete();
         }
       
         Product::findOrFail($id)->delete();

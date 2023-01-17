@@ -201,7 +201,7 @@
 <section class="row justify-content-center bg-white">
   <div class="col-lg-10 col-12 px-3 px-lg-5 w-100 py-2 sub-nav">
     <div class="d-flex align-items-center align-self-center">
-      <a href="#" class="text-secondary">Products </a> &nbsp; > &nbsp; <a href="#" class="text-secondary"> Mobile </a> &nbsp; > &nbsp; <span class="sn-current-product-name"> Samsung Galaxy Z Fold </span>
+      <a href="#" class="text-secondary">Products </a> &nbsp; > &nbsp; <a href="#" class="text-secondary"> Mobile </a> &nbsp; > &nbsp; <span class="sn-current-product-name"> {{ $product->title }}</span>
     </div>
   </div>
   <div class="px-3 px-lg-5">
@@ -233,7 +233,13 @@
       <div class="col-12 col-md-6 product-detail-info">
         <h4 class="product-title d-flex align-items-center align-self-center">{{ $product->title }} <div class="sn-instock d-block d-md-none ms-3" style="font-size: 14px;">Instock 2</div></h4>
         <div class="product-price my-2">${{ $product->price }}</div>
-        <div class="sn-instock d-none d-md-block mb-3">Instock 2</div>
+        @if ($product->stock == 1)
+          <div class="sn-instock d-none d-md-block mb-3">Instock 2</div>
+        @else
+          <div class="sn-instock d-none d-md-block mb-3 bg-danger">Out Of Stock</div>
+        @endif
+        
+      
         <div class="input-group sn-quantity">
           <span class="input-group-btn">
               <button type="button" class="quantity-left-minus"  data-type="minus" data-field="">

@@ -37,7 +37,7 @@
                                     <td>Name</td>
                                     <td>Email</td>
                                     <td>Role</td>
-                                    <td>Create Date</td>
+                                    <td>Address</td>
                                     <td>Action</td>
                                 </tr>
                             </thead>
@@ -74,16 +74,18 @@
               {
                 data: 'role',
                 render: function(data, type) {
-                    if(data == 1){
+                    if(data == 2){
                         var role = `<span class="badge badge-danger">ADMIN</span>`;
                       
-                    }else{
+                    }else if(data == 1){
                         var role = `<span class="badge badge-primary">STAFF</span>`;
+                    }else{
+                        var role = `<span class="badge badge-info">USER</span>`;
                     }
                     return  role;
                 }
               },
-              {data: 'created_date'},
+              {data: 'address'},
               {
                 data: 'action',
                 render: function(data, type) {

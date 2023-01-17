@@ -104,20 +104,17 @@
                                 </div>
                             </section>
                             <br/>
-                    
-
-                                    
-                                    <div id="preview-template" style="display: none;">
+                            <div id="preview-template" style="display: none;">
                                     <div class="dz-preview dz-file-preview">
                                         <div class="dz-image">
                                            <img data-dz-thumbnail="" class="w-100">
                                         </div>
                                     <div class="dz-details">
-                                    <div class="dz-size"><SPAN data-dz-size=""></SPAN></div>
-                                    <div class="dz-filename"><SPAN data-dz-name=""></SPAN></div></div>
-                                    <div class="dz-progress"><SPAN class="dz-upload" 
-                                    data-dz-uploadprogress=""></SPAN></div>
-                                    <div class="dz-error-message"><SPAN data-dz-errormessage=""></SPAN></div>
+                                    <div class="dz-size"><span data-dz-size=""></span></div>
+                                    <div class="dz-filename"><span data-dz-name=""></span></div></div>
+                                    <div class="dz-progress"><span class="dz-upload" 
+                                    data-dz-uploadprogress=""></span></div>
+                                    <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
                                     <div class="dz-success-mark">
                                     <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                                         <title>Check</title>
@@ -260,16 +257,16 @@
                 error:function(err){
                 // $("#loader").hide();
                     console.warn(err.responseJSON.errors);
-                    $('.invalid-feedback').remove();
+                    $('.mydivclass').remove();
                     $.each(err.responseJSON.errors, function (i, error) {
                         var al = $(document).find('[name="'+i+'"]');
                         var el = al.parent();
-                        var pl = al.parents('div.image_area');
-                        pl.addClass('photo-invalid');
-                        el.after($('<small class="text-danger font-weight-bolder"> <i class="fas fa-exclamation-circle"></i> '+error[0]+'</small>'));
+                        // var pl = al.parents('div.image_area');
+                        // pl.addClass('photo-invalid');
+                        el.after($('<small class="text-danger font-weight-bolder mydivclass"> <i class="fas fa-exclamation-circle"></i> '+error[0]+'</small>'));
                         al.addClass('is-invalid');
                     });
-                // $(".create").attr('disabled',false);
+                
 
 
                 },

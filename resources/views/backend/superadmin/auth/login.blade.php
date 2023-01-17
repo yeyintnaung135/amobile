@@ -10,9 +10,9 @@
   .semi-bold {
     font-weight: 600 !important;
   }
-  .user-login {
+  /* .user-login {
     
-  }
+  } */
   .user-login .form-control  {
     height: 45px;
     background: #fff;
@@ -130,7 +130,7 @@
                     @enderror
                   <div class="upper-header d-none d-md-block"></div>
                   <h3 class="mb-4">{{ __('Login as Super Admin') }}</h3>
-                    <form method="POST" action="{{ route('store_admin.login')}}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group mb-2">

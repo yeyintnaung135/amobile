@@ -8,7 +8,16 @@ trait UserRole
 {
    public function isSuperAdmin()
    {
-        if( Auth::guard('super_admin')->user()->role == 1 ){
+        if(Auth::user()->role == 2){
+            return true;
+        }else{
+            return abort(404);
+        }
+   }
+
+   public function isStaff()
+   {
+        if(Auth::user()->role == 1){
             return true;
         }else{
             return abort(404);

@@ -12,6 +12,11 @@
     border-radius: 50px;
   }
   .sn-cat-phone {
+    
+    color: #000;
+  }
+
+  .tag-active{
     background: #000;
     color: #fff;
   }
@@ -211,8 +216,8 @@
     <div class="d-flex align-items-center align-self-center justify-content-between">
       <h5 class="mb-0">PRODUCTS</h5>
       <div>
-        <button class="sn-cat-phone">Phone</button>
-        <button class="sn-cat-laptop">Laptop</button>
+        <a href="{{ route('products')}}" class="sn-cat-phone tag-active">Phone</a>
+        <a href="{{ route('products.laptop')}}" class="sn-cat-laptop">Laptop</a>
       </div>
     </div>
   </div>
@@ -243,39 +248,8 @@
           </div>
         </div>
         @empty
-          
+           <span>There is no product</span>
         @endforelse
-        
-        <!-- <div class="sn-specific-product position-relative mb-3">
-          <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
-          <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
-            <div class="product-price">$2500</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <div class="sn-specific-product position-relative mb-3">
-          <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
-          <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
-            <div class="product-price">$2500</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <div class="sn-specific-product position-relative mb-3">
-          <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
-          <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
-            <div class="product-price">$2500</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
-          </div>
-        </div> -->
       </div>
     </div>
 
@@ -302,46 +276,20 @@
         <a href="#" class="text-decoration-none" style="font-weight: bold; font-size: 18px;">See All</a>
       </div>
       <div class="d-flex flex-wrap justify-content-between sn-specific-product-wrapper">
+        @forelse ($products as $p)
         <div class="sn-specific-product position-relative mb-3">
           <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
+          <a href="{{ url('/product_detail/' . $p->id) }}" class="text-decoration-none"><img src="{{ asset($p->OnePhoto->image)}}" alt="" class="sn-product-image w-100"></a>
+          <a href="{{ url('/product_detail/'  . $p->id ) }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
           <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
-            <div class="product-price">$2500</div>
+            <div class="product-price">${{ $p->price }}</div>
             <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
             <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
           </div>
         </div>
-        <div class="sn-specific-product position-relative mb-3">
-          <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
-          <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
-            <div class="product-price">$2500</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <div class="sn-specific-product position-relative mb-3">
-          <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
-          <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
-            <div class="product-price">$2500</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <div class="sn-specific-product position-relative mb-3">
-          <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
-          <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
-            <div class="product-price">$2500</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
-          </div>
-        </div>
+        @empty
+        <span>There is no product</span>
+        @endforelse
       </div>
     </div>
   </div>

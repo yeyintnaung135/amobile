@@ -14,6 +14,13 @@ class ProductController extends Controller
         return view('frontend.products.products',compact('products'));
     }
 
+    public function products_laptop()
+    {
+        $products = Product::where('cat_id' , 0)->get();
+        $product = Product::latest()->paginate(4);
+        return view('frontend.products.product_laptop',compact('products','product'));
+    }
+
     public function product_detail($id)
     {
         $product = Product::findOrFail($id);

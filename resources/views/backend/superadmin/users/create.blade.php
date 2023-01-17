@@ -24,7 +24,7 @@
                        </div>
                     </div>
                     <div class="card-body">
-                       <form action="{{ route('store_admin.create')}}" method="post">
+                       <form action="{{ route('store_admin.role.create')}}" method="post">
                         @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Name</label>
@@ -50,8 +50,8 @@
                                 <select class="form-control @error('role')
                                     is-invalid
                                 @enderror" name="role" id="exampleFormControlSelect1">
-                                    <option value="1">Admin</option>
-                                    <option value="0">Staff</option>
+                                    <option value="2">Admin</option>
+                                    <option value="1">Staff</option>
                                 </select>
                                 @error('role')
                                     <span class="font-weight-bolder text-danger">{{ $message}}</span>

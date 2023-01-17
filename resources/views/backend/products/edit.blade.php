@@ -272,13 +272,13 @@
                 error:function(err){
                 // $("#loader").hide();
                     console.warn(err.responseJSON.errors);
-                    $('.invalid-feedback').remove();
+                    $('.mydivclass').remove();
                     $.each(err.responseJSON.errors, function (i, error) {
                         var al = $(document).find('[name="'+i+'"]');
                         var el = al.parent();
-                        var pl = al.parents('div.image_area');
-                        pl.addClass('photo-invalid');
-                        el.after($('<small class="text-danger font-weight-bolder"> <i class="fas fa-exclamation-circle"></i> '+error[0]+'</small>'));
+                        // var pl = al.parents('div.image_area');
+                        // pl.addClass('photo-invalid');
+                        el.after($('<small class="text-danger font-weight-bolder mydivclass"> <i class="fas fa-exclamation-circle"></i> '+error[0]+'</small>'));
                         al.addClass('is-invalid');
                     });
                 // $(".create").attr('disabled',false);

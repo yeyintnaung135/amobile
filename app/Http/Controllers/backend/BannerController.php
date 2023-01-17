@@ -3,31 +3,39 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\traid\FileUpload;
+use App\Http\Controllers\traid\UserRole;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
+    use UserRole,FileUpload;
 
     public function index()
     {
-        $banner = Banner::all();
-        return view('backend.banner.lists',compact('banner'));
+        if($this->isSuperAdmin()){
+            $banner = Banner::latest()->paginate(4);
+            return view('backend.banner.lists',compact('banner'));
+        }
+        
     }
     public function create()
     {
-        return view('backend.banner.create');
+        if($this->isSuperAdmin()){
+            return view('backend.banner.create');
+        }
+        
     }
 
     public function store(Request $request)
     {
+        $file_path = 'images/banner/';
         $request->validate(['file' => 'required'],['file.required' => 'Image Required']);
         $file = $request->file('file');
-        $newFileName = uniqid() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('images/banner/'), $newFileName);
         $banner = new Banner();
-        $banner->image = 'images/banner/' . $newFileName;
+        $banner->image = $this->save_file_path($file,$file_path);
         $banner->save();
 
         return redirect('store-admin/banner/all')->with('success','Banner Create Successfully');
@@ -36,8 +44,11 @@ class BannerController extends Controller
 
     public function edit($id)
     {
-        $banner = Banner::findOrFail($id);
-        return view('backend.banner.edit',compact('banner'));
+        
+        if($this->isSuperAdmin()){
+            $banner = Banner::findOrFail($id);
+             return view('backend.banner.edit',compact('banner'));
+        }
     }
 
     public function update(Request $request,$id)

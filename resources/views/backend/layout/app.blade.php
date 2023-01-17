@@ -45,6 +45,12 @@
         font-weight: 300;
         text-rendering: optimizeLegibility;
     }
+
+    .dropdown-item:focus, .dropdown-item:hover {
+        color: #16181b;
+        text-decoration: none;
+        background-color: transparent !important;
+        }
 </style>
 @stack('style')
 <style>

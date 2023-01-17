@@ -7,7 +7,7 @@
                   <i class="fas fa-phone-alt text-info"></i>&nbsp;&nbsp;<span>+959 250720776</span>
                 </div>
                 <div class="mb-lg-4">
-                <i class="fas fa-envelope text-info"></i>&nbsp;&nbsp;<span>hnincherry1024@gmail.com</span>
+                <i class="fas fa-envelope text-info"></i>&nbsp;&nbsp;<span>ksthan30@gmail.com</span>
                 </div>
             </div>
         </div>

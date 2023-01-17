@@ -13,7 +13,7 @@
        }
 
        .tab-inner-width{
-         width: 15%;
+         width: 20%;
        }
 
 
@@ -108,7 +108,7 @@
         }
 
         .price{
-            font-size: 20px;
+            font-size: 15px;
         }
 
         .ads{
@@ -347,13 +347,13 @@
 @section('content')
     <section class="row justify-content-center">
        <div class="col-lg-12 col-12 px-3 px-lg-5">
-          @include('frontend.layout.swiper_slider.slider')
+         @include('frontend.layout.swiper_slider.slider')
           <div class="row sub-title">
             <div class="col-12 py-lg-3 p-1">
                 <div class="px-lg-1 d-flex justify-content-between align-items-lg-center ">
                    <div class="sub-title-inner-width d-block d-lg-flex justify-content-between align-items-center ">
                     <h3 class="mb-3 mb-lg-0 font-weight-bolder">Our New Arrivals</h3>
-                    <div class="tab p-lg-2 tab-inner-width d-lg-flex justify-content-between mt-2"> 
+                    <div class="tab p-lg-2 tab-inner-width d-lg-flex  justify-content-between mt-2"> 
                         <div class="tablinks rounded-4 active" onclick="opemTab(event, 'Phone')">Phone</div>
                         <div class="tablinks rounded-4 " onclick="opemTab(event, 'Laptop')">Laptop</div>
                     </div>

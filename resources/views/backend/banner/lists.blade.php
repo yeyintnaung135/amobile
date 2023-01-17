@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6 mt-4">
+            <div class="col-12 mt-4">
                 <!-- card start  -->
                 <div class="card">
                     <div class="card-header">
@@ -13,6 +13,14 @@
                        </div>
                     </div>
                     <div class="card-body">
+                        @if (Session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ Session('success')}}</strong> 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
@@ -37,8 +45,12 @@
                                      </div>
                                    </td>
                                    <td>
-                                       <a href="{{ route('store_admin.banner.edit',$b->id )}}" class="btn btn-info">Edit</a>
-                                       <a href="{{ route('store_admin.banner.delete',$b->id )}}" onclick="return confirm('Are you sure you want to delete this banner?');" class="btn btn-danger">Del</a>
+                                       <a href="{{ route('store_admin.banner.edit',$b->id )}}" class="btn btn-info">
+                                        <i class="fas fa-edit"></i>
+                                       </a>
+                                       <a href="{{ route('store_admin.banner.delete',$b->id )}}" onclick="return confirm('Are you sure you want to delete this banner?');" class="btn btn-danger">
+                                       <i class="fas fa-trash"></i>
+                                       </a>
                                    </td>
                                 </tr>
                                 @empty

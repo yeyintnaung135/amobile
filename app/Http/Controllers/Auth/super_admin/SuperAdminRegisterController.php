@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth\super_admin;
 
-use App\Models\SuperAdmin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -15,31 +15,22 @@ class SuperAdminRegisterController extends Controller
         return view('backend.superadmin.auth.register');
     }
     
-    public function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:super_admins'],
-            'password' => ['required', 'string', 'min:8'],
-            'password_confirmation' => 'required|min:8|same:password'
-        ]);
-    }
-
 
     public function create(Request $request)
     {
-        $valid = $this->validator($request->except('_token'));
-        if( $valid->fails())
-        {
-            return redirect()->back()->withErrors($valid)->withInput();
-        }
-        $data = $request->except("_token");
-        SuperAdmin::create([
-            'name' => $data['name'],
-            'role' => $data['role'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $request->validate( [
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'password_confirmation' => 'required|min:8|same:password'
         ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->password = Hash::make($request->password);
+        $user->save();
         return redirect()->route('store_admin.users.list');
     }
 }

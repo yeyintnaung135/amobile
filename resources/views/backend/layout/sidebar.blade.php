@@ -1,7 +1,8 @@
   @php
+  use App\Models\User;
     function isSuperAdmin()
     {
-      if( Auth::guard("super_admin")->user()->role == 1){
+      if(Auth::user()->role == 2){
         return true;
       }
     }
@@ -13,9 +14,9 @@
     <a href="/" class="brand-link">
       <img src="{{ asset('images/logos/admin.png')}}" alt="A Mobile Store Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       @if (isSuperAdmin())
-        <span class="brand-text font-weight-light">{{ Auth::guard("super_admin")->user()->name}}(Admin)</span>
+        <span class="brand-text font-weight-light">{{ Auth::user()->name}}(Admin)</span>
       @else
-        <span class="brand-text font-weight-light">{{ Auth::guard("super_admin")->user()->name}}(Staff)</span>
+        <span class="brand-text font-weight-light">{{ Auth::user()->name}}(Staff)</span>
       @endif
     </a>
 
@@ -42,7 +43,7 @@
                 <p>
                   Admins
                   <i class="fas fa-angle-left right"></i>
-                  <span class="badge badge-info right">6</span>
+                  <span class="badge badge-info right">{{ count(User::all())}}</span>
                 </p>
               </a>
               <ul class="nav nav-treeview">
@@ -83,6 +84,29 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-pen-alt"></i>
+                <p>
+                  Post
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('store_admin.post.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Create Post</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('store_admin.post.all')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Post</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
           @endif
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -107,40 +131,21 @@
                 </li>
               </ul>
             </li>
-          @if (isSuperAdmin())
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tools"></i>
-                <p>
-                  Site Settings
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>DataTables</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/tables/jsgrid.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>jsGrid</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          @endif
+  
             <li href="#" class="nav-link text-center">
-              <a href="{{route('store_admin.logout')}}" role="button" type="submit" class="">Logout</a>
+              <div>
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                      logout
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                  </form>
+              </div>
             </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

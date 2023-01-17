@@ -83,7 +83,7 @@
       </div>
       <div class="col-sm col-md-6 mb-4 ps-2 ">
         <div class="position-relative">
-          <img src="{{ asset('images/banner/contact.png')}}" alt="" class="contact-banner">
+          <img src="{{ asset('images/assets/contact.jpeg')}}" alt="" class="contact-banner">
           <div class="overlay"></div>
         </div>
       </div>

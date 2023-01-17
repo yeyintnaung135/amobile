@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
     public function news()
     {
-        return view('frontend.news');
+        $posts = Post::all();
+        return view('frontend.news.news',compact('posts'));
     }
 
     public function product_detail($id)

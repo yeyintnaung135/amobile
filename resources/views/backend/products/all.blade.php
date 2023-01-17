@@ -59,15 +59,17 @@
                                      </div>
                                    </td>
                                   <td scope="row">$ {{ $p->price }}</td>
-                                  <td scope="row" class="mobile">{!! Str::words($p->description,9) !!}</td>
+                                  <td scope="row" class="mobile">{!! $p->description !!}</td>
                                 
                                    <td class="d-flex">
-                                       <a href="{{ route('store_admin.product.edit',$p->id )}}" class="btn btn-info btn-sm mr-2">Edit</a>
+                                       <a href="{{ route('store_admin.product.edit',$p->id )}}" class="btn btn-info btn-sm mr-2"> <i class="fas fa-edit"></i></a>
                                        <form action="{{ route('store_admin.product.delete',$p->id )}}" method="post" id="productDelete" >
                                             @csrf
                                             @method('DELETE')
                                        </form>
-                                       <button type="submit" form="productDelete" onclick="return confirm('Are you sure you want to delete this product?');" class="btn btn-danger btn-sm">Del</button>
+                                       <button type="submit" form="productDelete" onclick="return confirm('Are you sure you want to delete this product?');" class="btn btn-danger btn-sm">
+                                       <i class="fas fa-trash"></i> 
+                                       </button>
                                    </td>
                                 </tr>
                                 @empty
