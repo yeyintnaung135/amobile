@@ -34,6 +34,11 @@ Auth::routes();
 Route::get('/news', [App\Http\Controllers\frontend\NewsController::class, 'news']);
 Route::get('/contact', [App\Http\Controllers\frontend\ContactController::class, 'contact']);
 
+Route::get('/billing', [App\Http\Controllers\frontend\BillingController::class, 'billing']);
+Route::get('/payment', [App\Http\Controllers\frontend\PaymentController::class, 'payment']);
+Route::get('/review', [App\Http\Controllers\frontend\PaymentController::class, 'review']);
+
+Route::post('/user/update/{id}', [App\Http\Controllers\HomeController::class, 'user_update'])->name('user.update');
 
 
 /**  Frontend Group  **/
