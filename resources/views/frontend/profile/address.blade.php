@@ -39,7 +39,7 @@
                       <div class="d-flex bg-smoke justify-content-between w-100 rounded-1 mb-2">
                          <div class="p-3 align-items-center d-flex justify-content-around">
                             <i class="far fa-user"></i>
-                            <span class="ml">My Profile</span>
+                            <a href="{{ route('home')}}"><span class="ml">My Profile</span></a>
                          </div>
                          <div class="p-3">
                             <i class="fas fa-angle-right"></i>
@@ -83,7 +83,7 @@
                       <div class="d-flex bg-smoke justify-content-between w-100 rounded-1 mb-2">
                          <div class="p-3 d-flex align-items-center">
                          <i class="far fa-eye"></i>
-                            <span class="ml">Change Password</span>
+                            <a href="{{ route('change_password')}}"> <span class="ml">Change Password</span></a>
                          </div>
                          <div class="p-3">
                             <i class="fas fa-angle-right"></i>
@@ -98,7 +98,7 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-12 d-flex justify-content-between p-3">
-                    <h3 class="font-weight-bolder">My Profile</h3>
+                    <h3 class="font-weight-bolder">Billing Address</h3>
                     <a href="" class="">Edit</a>
                 </div>
                 <div class="row">
@@ -109,31 +109,15 @@
                     </div>
                     @endif
                     <div class="col-12 p-5">
-                        <form method="post" action="{{ route('user.update', $user->id )}}">
+                        <form method="post" action="{{ route('billing_address.store',Auth::id())}}">
                             @csrf
-                            <div class="mb-3">
-                                <label for="userName" class="form-label">User Name</label>
-                                <input type="text" name="name" class="form-control @error('name')
-                                    is-invalid
-                                @enderror" id="userName" value="{{ $user->name }}">
-                                @error('name')
-                                    <span class="text-danger font-weight-bolder">{{ $message}}</span>
-                                @enderror
+                            @method('PUT')
+                            <div class="form-group mb-4">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" name="address" id="address" rows="10">{{ $user->address }}</textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="text" class="form-control @error('email')
-                                    is-invalid
-                                @enderror" name="email" id="exampleInputEmail1"value="{{ $user->email }}">
-                                @error('email')
-                                    <span class="text-danger font-weight-bolder">{{ $message}}</span>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Phone</label>
-                                <input type="text" name="phone" class="form-control" id="phone" value="">
-
-                            </div>
+                     
+                         
                             <div class="w-100 d-flex justify-content-center">
                               <button type="submit" class="btn btn-primary bg-blue-dark" >Save Change</button>
                             </div>
@@ -145,3 +129,10 @@
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+            $('#description').summernote({
+            height: 200  
+        });
+    </script>
+@endpush

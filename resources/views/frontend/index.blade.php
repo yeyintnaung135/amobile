@@ -68,6 +68,7 @@
             position: relative;
             height: 250px;
             overflow: hidden;
+            border:1px solid red;
         }
 
         .card-header img{
@@ -80,6 +81,7 @@
         }
         .card-header img:hover{
             transform: scale(1.2);
+           
         }
 
         .card-header i{
@@ -95,17 +97,7 @@
             border:1px solid red;
         } */
 
-        .my-cart{
-            border-radius: 50px;
-            width: 150px;
-            height: 40px;
-            background-color:#0b1c35;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            cursor: pointer;
-        }
+
 
         .price{
             font-size: 15px;
@@ -348,7 +340,7 @@
     <section class="row justify-content-center">
        <div class="col-lg-12 col-12 px-3 px-lg-5">
          @include('frontend.layout.swiper_slider.slider')
-          <div class="row sub-title">
+          <div class="row sub-title p-2">
             <div class="col-12 py-lg-3 p-1">
                 <div class="px-lg-1 d-flex justify-content-between align-items-lg-center ">
                    <div class="sub-title-inner-width d-block d-lg-flex justify-content-between align-items-center ">
@@ -362,29 +354,33 @@
                 </div>
             </div>
           </div>
-          <div class="row new-arrivals-product mb-lg-5 p-0">
-            <div class="col-12 p-lg-0 p-1">
+          <div class="row new-arrivals-product mb-lg-5 p-2">
+            <div class="col-12 p-lg-0 p-2">
                 <div id="Phone" class="tabcontent">
                    <div class="row">
                     @forelse ($new_arrival_phones as $p)
-                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
+                    <div class="col-6 p-0 mb-2 col-xl-3 p-lg-0  card-height d-flex justify-content-center">
                         <div class="card rounded-3">
                             <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 text-center">
+                                @if (isset($p->OnePhoto->image))
                                 <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
+                                @else
+                                <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="w-100">
+                                @endif
                                 <i class="far fa-heart"></i>
                             </a>
                             <div class="card-body p-2">
-                            <div class="row p-lg-2">
-                                <div class="col-lg-6 col-7">
-                                    <h4>{{ $p->title }}</h4>
-                                    <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                <div class="row p-lg-2">
+                                    <div class="col-12 mb-2">
+                                        <h4>{{ $p->title }}</h4>
                                     </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div> 
+                                    <div class="col-12 d-flex justify-content-between align-items-center">
+                                        <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                        <a href="{{ route('add.to.cart',$p->id )}}" class="my-cart">
+                                            <div class="d-flex  align-items-center">
+                                               <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
+                                            </div>
+                                        </a> 
                                     </div>
                                 </div>
                             </div>
@@ -400,24 +396,28 @@
                 <div id="Laptop" class="tabcontent tabcontent-2">
                   <div class="row">
                     @forelse ($new_arrival_laptops as $p)
-                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
+                    <div class="col-6 p-0 mb-2 col-xl-3 p-lg-0  card-height d-flex justify-content-center">
                         <div class="card rounded-3">
-                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 ">
+                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 text-center">
+                                @if (isset($p->OnePhoto->image))
                                 <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
+                                @else
+                                <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="w-100">
+                                @endif
                                 <i class="far fa-heart"></i>
                             </a>
                             <div class="card-body p-2">
-                            <div class="row p-lg-2">
-                                <div class="col-lg-6 col-7">
-                                    <h4>{{ $p->title }}</h4>
-                                    <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                <div class="row p-lg-2">
+                                    <div class="col-12 mb-2">
+                                        <h4>{{ $p->title }}</h4>
                                     </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div> 
+                                    <div class="col-12 d-flex justify-content-between align-items-center">
+                                        <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                        <a href="{{ route('add.to.cart',$p->id )}}" class="my-cart">
+                                            <div class="d-flex  align-items-center">
+                                               <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
+                                            </div>
+                                        </a> 
                                     </div>
                                 </div>
                             </div>
@@ -433,7 +433,7 @@
             </div>
           </div>
           <div class="row sub-title">
-            <div class="col-12 py-lg-3 p-1 p-lg-2">
+            <div class="col-12 py-lg-3 p-2 p-lg-2">
                 <div class="px-lg-1 p-0 d-flex justify-content-between align-items-lg-center ">
                    <div class="sub-title-inner-width d-block d-lg-flex justify-content-between align-items-center ">
                     <h3 class="mb-3 mb-lg-0 font-weight-bolder">Grab the best deals on <span class="text-info">Smartphones</span></h3>
@@ -443,27 +443,31 @@
             </div>
           </div>
           <div class="row smart-phone">
-            <div class="col-12 p-lg-0 p-1">
+            <div class="col-12 p-lg-0 p-3">
                   <div class="row">
-                  @forelse ($phones as $p)
-                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
+                    @forelse ($phones as $p)
+                    <div class="col-6 p-0 mb-2 col-xl-3 p-lg-0  card-height d-flex justify-content-center">
                         <div class="card rounded-3">
                             <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 text-center">
+                                @if (isset($p->OnePhoto->image))
                                 <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
+                                @else
+                                <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="w-100">
+                                @endif
                                 <i class="far fa-heart"></i>
                             </a>
                             <div class="card-body p-2">
-                            <div class="row p-lg-2">
-                                <div class="col-lg-6 col-7">
-                                    <h4>{{ $p->title }}</h4>
-                                    <span class="text-info font-weight-bolder price">${{$p->price}}</span>
+                                <div class="row p-lg-2">
+                                    <div class="col-12 mb-2">
+                                        <h4>{{ $p->title }}</h4>
                                     </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div> 
+                                    <div class="col-12 d-flex justify-content-between align-items-center">
+                                        <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                        <a href="{{ route('add.to.cart',$p->id )}}" class="my-cart">
+                                            <div class="d-flex  align-items-center">
+                                               <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
+                                            </div>
+                                        </a> 
                                     </div>
                                 </div>
                             </div>
@@ -519,27 +523,31 @@
             </div>
           </div>
           <div class="row laptop">
-            <div class="col-12 p-lg-0 p-1">
+            <div class="col-12 p-lg-0 p-3">
                   <div class="row">
                   @forelse ($laptops as $p)
-                    <div class="col-6 mb-2 col-xl-3 p-lg-0 p-2 card-height d-flex justify-content-center">
+                  <div class="col-6 p-0 mb-2 col-xl-3 p-lg-0  card-height d-flex justify-content-center">
                         <div class="card rounded-3">
-                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 ">
+                            <a href="{{ route('product_detail',$p->id)}}" class="card-header border-0 p-0 text-center">
+                                @if (isset($p->OnePhoto->image))
                                 <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100">
+                                @else
+                                <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="w-100">
+                                @endif
                                 <i class="far fa-heart"></i>
                             </a>
                             <div class="card-body p-2">
-                            <div class="row p-lg-2">
-                                <div class="col-lg-6 col-7">
-                                    <h4>{{ $p->title }}</h4>
-                                    <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                <div class="row p-lg-2">
+                                    <div class="col-12 mb-2">
+                                        <h4>{{ $p->title }}</h4>
                                     </div>
-                                    <div class="col-lg-6 col-5 d-flex justify-content-center align-items-center">
-                                    <div class="my-cart">
-                                        <div class="d-flex  align-items-center">
-                                          <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                    </div> 
+                                    <div class="col-12 d-flex justify-content-between align-items-center">
+                                        <span class="text-info font-weight-bolder price">${{ $p->price }}</span>
+                                        <a href="{{ route('add.to.cart',$p->id )}}" class="my-cart">
+                                            <div class="d-flex  align-items-center">
+                                               <span class="d-none d-xl-block p-1">Add To Cart</span> <i class="fas fa-shopping-cart"></i>
+                                            </div>
+                                        </a> 
                                     </div>
                                 </div>
                             </div>
@@ -556,7 +564,7 @@
        </div>
     </section>
 @endsection
-@push('script')
+@push('scripts')
     <script>
         var swiper = new Swiper(".mySwiper", {
             pagination: {

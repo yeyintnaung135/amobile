@@ -22,9 +22,6 @@
     align-items: center;
 }
 
-.swiper-slide img{
-    object-fit: contain;
-}
 
 .swiper-slide img {
     display: block;

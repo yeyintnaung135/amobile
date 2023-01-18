@@ -239,12 +239,22 @@
         @forelse ($products as $p)
         <div class="sn-specific-product position-relative mb-3">
           <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/' .$p->id) }}" class="text-decoration-none"><img src="{{ asset($p->OnePhoto->image)}}" alt="" class="sn-product-image w-100"></a>
+          <a href="{{ url('/product_detail/' .$p->id) }}" class="text-decoration-none">
+            @if (isset($p->OnePhoto->image))
+            <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="sn-product-image w-100">
+            @else
+            <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="sn-product-image w-100">
+            @endif
+          </a>
           <a href="{{ url('/product_detail/' . $p->id) }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">{{ $p->title }}</h4></a>
-          <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
+          <div class="d-flex justify-content-between align-items-center  mb-2">
             <div class="product-price">${{ $p->price }}</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
+            <a href="{{ route('add.to.cart',$p->id )}}" class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></a>
+            <a  href="{{ route('add.to.cart',$p->id )}}">
+            <button class="add-to-cart-mobile d-block d-md-none">
+              <span class=""><i class="fas fa-shopping-cart"></i>
+            </button>
+            </a>
           </div>
         </div>
         @empty
@@ -279,12 +289,22 @@
         @forelse ($products as $p)
         <div class="sn-specific-product position-relative mb-3">
           <img src="{{ asset('images/icons/heart.png')}}" alt="" class="sn-heart">
-          <a href="{{ url('/product_detail/' . $p->id) }}" class="text-decoration-none"><img src="{{ asset($p->OnePhoto->image)}}" alt="" class="sn-product-image w-100"></a>
+          <a href="{{ url('/product_detail/' . $p->id) }}" class="text-decoration-none">
+           @if (isset($p->OnePhoto->image))
+            <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="sn-product-image w-100">
+            @else
+            <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="sn-product-image w-100">
+            @endif
+          </a>
           <a href="{{ url('/product_detail/'  . $p->id ) }}" class="text-decoration-none"><h4 class="mt-2 mb-1 mt-md-4 mb-md-2">Samsung Galaxy Z Fold</h4></a>
           <div class="d-flex justify-content-between align-items-center align-self-center mb-2">
             <div class="product-price">${{ $p->price }}</div>
-            <button class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
-            <button class="add-to-cart-mobile d-block d-md-none"><span class=""><i class="fas fa-shopping-cart"></i></button>
+            <a href="{{ route('add.to.cart',$p->id )}}" class="add-to-cart d-none d-md-block"><span class="">Add to cart</span> <i class="fas fa-shopping-cart"></i></a>
+            <a  href="{{ route('add.to.cart',$p->id )}}">
+            <button class="add-to-cart-mobile d-block d-md-none">
+              <span class=""><i class="fas fa-shopping-cart"></i>
+            </button>
+            </a>
           </div>
         </div>
         @empty

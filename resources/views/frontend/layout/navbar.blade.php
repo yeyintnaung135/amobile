@@ -15,7 +15,13 @@
     </div>
     <div class="nav-right-mobile">
         <a class="nav-item" href="#contact"><i class="fas fa-search"></i></a>
-        <a class="nav-item" href="#about"><i class="fas fa-shopping-cart"></i></a>
+        <a class="nav-item position-relative" href="{{ route('cart')}}">
+             <i class="fas fa-shopping-cart"></i>
+             @if ( count((array) session('cart')) > 0)
+             <span class="badge badge-top bg-info">{{ count((array) session('cart')) }}</span>
+             @endif
+             
+           </a>
         <div class="nav-item dropdown d-flex justify-content-end">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
              <i class="fas fa-user"></i>
@@ -49,7 +55,13 @@
         </ul>
         <div class="nav-right">
           <a class="nav-item" href="#contact"><i class="fas fa-search"></i></a>
-          <a class="nav-item" href="#about"><i class="fas fa-shopping-cart"></i></a>
+          <a class="nav-item position-relative" href="{{ route('cart')}}">
+             <i class="fas fa-shopping-cart"></i>
+             @if (count((array) session('cart')) > 0)
+             <span class="badge badge-top bg-info">{{ count((array) session('cart')) }}</span>
+             @endif
+             
+           </a>
           <div class="nav-item dropdown d-flex justify-content-end">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fas fa-user"></i>

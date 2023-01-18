@@ -211,20 +211,32 @@
           <div class="position-relative">
               <div class="swiper productDetailSwiper">
                   <div class="swiper-wrapper">
-                    @foreach ($product->getProductPhotos as $p)
+                @if (isset($product->getProductPhotos))
+                   @foreach ($product->getProductPhotos as $p)
                     <div class="swiper-slide" data-src="{{ asset('images/products/samsung.png')}}" data-fancybox="product_detail">
                       <img src="{{ asset($p->image)}}"/>
                     </div>
                     @endforeach
+                @else
+                  <div class="swiper-slide" data-src="{{ asset('images/products/samsung.png')}}" data-fancybox="product_detail">
+                      <img src="{{ asset('images/assets/default_product.png')}}"/>
+                    </div>
+                @endif
                   </div>
               </div>
               <div thumbsSlider="" class="swiper productDetailSwiperthumb">
                 <div class="swiper-wrapper">
-                @foreach ($product->getProductPhotos as $p)
+                  @if (isset($product->getProductPhotos))
+                    @foreach ($product->getProductPhotos as $p)
+                    <div class="swiper-slide border-0">
+                      <img src="{{ asset($p->image)}}"/>
+                    </div>
+                     @endforeach
+                  @else
                   <div class="swiper-slide border-0">
-                    <img src="{{ asset($p->image)}}"/>
-                  </div>
-                @endforeach
+                      <img src="{{ asset('images/assets/default_product.png')}}"/>
+                    </div>
+                  @endif
                 </div>
               </div>
   
@@ -292,7 +304,13 @@
       <div class="d-flex flex-wrap justify-content-between sn-specific-product-wrapper">
         @forelse ($relative_products as $r)
         <div class="sn-specific-product position-relative mb-3">
-          <a href="{{ url('/product_detail/' . $r->id) }}" class="text-decoration-none"><img src="{{ asset($r->OnePhoto->image)}}" alt="" class="sn-product-image w-100"></a>
+          <a href="{{ url('/product_detail/' . $r->id) }}" class="text-decoration-none">
+            @if(isset($r->OnePhoto))
+             <img src="{{ asset($r->OnePhoto->image)}}" alt="" class="sn-product-image w-100">
+            @else
+            <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="sn-product-image w-100">
+            @endif
+          </a>
           <div class="text-center product-price">${{ $r->price }}</div>
         </div>
         @empty

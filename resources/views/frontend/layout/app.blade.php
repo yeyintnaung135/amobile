@@ -29,6 +29,10 @@
                 color: #000;
             }
 
+            a:hover{
+                color:#000;
+            }
+
             .nav-row{
                 width: 95%;
             }
@@ -46,6 +50,21 @@
 
             .nav-right{
                 display: flex;
+            }
+
+            .navbar i{
+                font-size: 16px;
+            }
+
+            .badge-top{
+                position: absolute;
+                top: -6px;
+                right: 6px;
+                width: 15px;
+                height: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
             .nav-right-mobile{
                 display: none;
@@ -143,7 +162,24 @@
             /* bootstrap 5 Custom Hambuger End  */
             
             
-        
+            /* Product Cart  */
+            .my-cart{
+                border-radius: 50px;
+                width: 150px;
+                height: 40px;
+                background-color:#0b1c35;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+                cursor: pointer;
+           }
+
+            .my-cart:hover{
+                background-color: #ffffff;
+                color: #000;
+                border: 1px solid #000;
+            }
 
  
             .font-weight-bolder{
@@ -247,7 +283,7 @@
     <script src="{{ asset('js/app.js')}}"></script>
     <script src="{{ asset('js/fancybox.js')}}"></script>
     <script src="{{ asset('js/swiper-bundle.min.js')}}"></script>
-    @stack('script')
+   
     <script>
         // window.onscroll = function() {scrollFunction()};
 
@@ -268,6 +304,7 @@
         }
 
     </script>
+     @stack('scripts')
 </html>
 
     

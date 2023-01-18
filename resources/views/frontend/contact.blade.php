@@ -26,8 +26,13 @@
     border: 1px solid #101d30;
     background: transparent;
   }
+  .contact-banner-container{
+    display: flex;
+    justify-content: center;
+  }
   .contact-banner, .overlay {
-    width: 95%;
+    width: 80%;
+    height: 500px;
     margin-left: 5%;
     border-radius: 5px;
   }
@@ -82,7 +87,7 @@
         </form>
       </div>
       <div class="col-sm col-md-6 mb-4 ps-2 ">
-        <div class="position-relative">
+        <div class="position-relative contact-banner-container">
           <img src="{{ asset('images/assets/contact.jpeg')}}" alt="" class="contact-banner">
           <div class="overlay"></div>
         </div>

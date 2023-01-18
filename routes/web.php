@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\BannerController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\frontend\FrontController;
+use App\Http\Controllers\frontend\ProductController as FrontendProductController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 
 /*
@@ -25,21 +27,39 @@ use App\Http\Controllers\PostController;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/products', [App\Http\Controllers\frontend\ProductController::class, 'products'])->name('products');
-Route::get('/products/laptops', [App\Http\Controllers\frontend\ProductController::class, 'products_laptop'])->name('products.laptop');
 
-Route::get('/product_detail/{product_id}', [App\Http\Controllers\frontend\ProductController::class, 'product_detail'])->name('product_detail');
+
 
 Route::get('/news', [App\Http\Controllers\frontend\NewsController::class, 'news']);
 Route::get('/contact', [App\Http\Controllers\frontend\ContactController::class, 'contact']);
 
-Route::post('/user/update/{id}', [App\Http\Controllers\HomeController::class, 'user_update'])->name('user.update');
+
 
 /**  Frontend Group  **/
 Route::controller(FrontController::class)->group(function(){
     Route::get('/','index')->name('dashboard')->name('front');
+});
+
+Route::controller(FrontendProductController::class)->group(function(){
+    Route::get('/products', 'products')->name('products');
+    Route::get('/products/laptops', 'products_laptop')->name('products.laptop');
+    Route::get('/product_detail/{product_id}' ,'product_detail')->name('product_detail');
+    Route::get('add-to-cart/{id}', 'addToCart')->name('add.to.cart');
+    Route::get('/cart','cart')->name('cart');
+    Route::patch('update-cart', 'update')->name('update.cart');
+    Route::delete('remove-from-cart', 'remove')->name('remove.from.cart');
+});
+
+
+/** My Account */
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/home','index')->name('home');
+    Route::get('user/changepassword','change_password')->name('change_password');
+    Route::get('user/billing_address','address')->name('billing_address');
+    Route::put('user/billing_address/{user}','store_address')->name('billing_address.store');
+    Route::post('user/changepasswordstore','change_password_store')->name('change_password.store');
+    Route::post('/user/update/{id}', 'user_update')->name('user.update');
 });
 
 /**  Super Admin Group  */
