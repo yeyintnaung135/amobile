@@ -39,16 +39,16 @@
                                 @forelse ($banner as $b)
                                 <tr>
                                   <td scope="row">{{ $id++ }}</td>
-                                   <td class="w-75">
-                                     <div class="w-100">
+                                   <td class="w-lg-75 w-50">
+                                     <div>
                                        <img src="{{ asset($b->image)}}" alt="" class="w-25">
                                      </div>
                                    </td>
                                    <td>
-                                       <a href="{{ route('store_admin.banner.edit',$b->id )}}" class="btn btn-info">
+                                       <a href="{{ route('store_admin.banner.edit',$b->id )}}" class="btn btn-info btn-sm">
                                         <i class="fas fa-edit"></i>
                                        </a>
-                                       <a href="{{ route('store_admin.banner.delete',$b->id )}}" onclick="return confirm('Are you sure you want to delete this banner?');" class="btn btn-danger">
+                                       <a href="{{ route('store_admin.banner.delete',$b->id )}}" onclick="return confirm('Are you sure you want to delete this banner?');" class="btn btn-danger btn-sm">
                                        <i class="fas fa-trash"></i>
                                        </a>
                                    </td>

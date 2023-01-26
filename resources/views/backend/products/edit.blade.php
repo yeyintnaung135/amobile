@@ -72,6 +72,15 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="stockCount">Count</label>
+                            <input type="text" name="count" class="form-control @error('count')
+                                is-invalid
+                            @enderror" id="stockCount"  value="{{ old('count',$product->count )}}">
+                            @error('count')
+                                <span class="font-weight-bolder text-danger">{{ $message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="category">Category</label>
                             <select class="form-control @error('cat_id')
                                 is-invalid
@@ -258,6 +267,7 @@
                 title: jQuery("input[name=title]").val(),
                 price : jQuery("input[name=price]").val(),
                 stock : jQuery("select[name=stock]").val(),
+                count : jQuery("input[name=count]").val(),
                 description : jQuery("textarea[name=description]").val(),
                 specification : jQuery("textarea[name=specification]").val(),
                 image : base64data

@@ -70,7 +70,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
+                                <div class="position-relative">
+                                  <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
+                                   <i class="fas fa-eye-slash " id="togglePassword" onclick="confirmToggleEye(this)"></i>
+                                </div>
                                 @error('password_confirmation')
                                     <span class="font-weight-bolder text-danger">{{ $message}}</span>
                                 @enderror
@@ -89,6 +92,15 @@
     <script>
     function toggleEye(e){
         var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            $(e).toggleClass('fas fa-eye-slash fas fa-eye');
+    }
+    function confirmToggleEye(e){
+        var x = document.getElementById("password_confirmation");
         if (x.type === "password") {
             x.type = "text";
             } else {

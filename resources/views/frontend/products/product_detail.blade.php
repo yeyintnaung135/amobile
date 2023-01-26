@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-
+@section('title','A-Mobile | Product Detail')
 @push('style')
 <style>
   a:hover {
@@ -90,8 +90,12 @@
     opacity: 1;
   }
   .productDetailSwiper img {
-    background: #f3f3f3;
+    background: #0f1c2f;
     border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    /* width: 80%; */
   }
   .sn-instock {
     background: #54e18d61;
@@ -100,6 +104,14 @@
     border-radius: 15px;
     width: 90px;
     text-align: center;
+  }
+
+  .sn-outstock{
+    padding: 5px 15px;
+    border-radius: 15px;
+    width: 130px;
+    text-align: center;
+    color:#fff;
   }
 
   input {
@@ -186,6 +198,8 @@
       width: 48%;
       padding: 10px;
     }
+
+
   }
 
   /* Mobile */
@@ -196,12 +210,12 @@
   }
 </style>
 @endpush
-
 @section('content')
 <section class="row justify-content-center bg-white">
   <div class="col-lg-10 col-12 px-3 px-lg-5 w-100 py-2 sub-nav">
     <div class="d-flex align-items-center align-self-center">
-      <a href="#" class="text-secondary">Products </a> &nbsp; > &nbsp; <a href="#" class="text-secondary"> Mobile </a> &nbsp; > &nbsp; <span class="sn-current-product-name"> {{ $product->title }}</span>
+      <a href="{{ url('/products/')}}" class="text-secondary">Products </a> &nbsp; > &nbsp; 
+      <a href="{{ url('/products') }}" class="text-secondary"> Mobile </a> &nbsp; > &nbsp;<span class="sn-current-product-name"> {{ $product->title }}</span>
     </div>
   </div>
   <div class="px-3 px-lg-5">
@@ -211,22 +225,22 @@
           <div class="position-relative">
               <div class="swiper productDetailSwiper">
                   <div class="swiper-wrapper">
-                @if (isset($product->getProductPhotos))
+                  @if (isset($product->getProductPhotos)) 
                    @foreach ($product->getProductPhotos as $p)
-                    <div class="swiper-slide" data-src="{{ asset('images/products/samsung.png')}}" data-fancybox="product_detail">
-                      <img src="{{ asset($p->image)}}"/>
+                    <div class="swiper-slide" data-src="{{ asset($p->image) }}" data-fancybox="product_detail">
+                      <img src="{{ asset($p->image) }}" class="img-responsive"/>
                     </div>
                     @endforeach
-                @else
-                  <div class="swiper-slide" data-src="{{ asset('images/products/samsung.png')}}" data-fancybox="product_detail">
-                      <img src="{{ asset('images/assets/default_product.png')}}"/>
+                  @else 
+                    <div class="swiper-slide" data-src="{{ asset('images/assets/default_product.png')}}" data-fancybox="product_detail">
+                      <img src="{{ asset('images/assets/default_product.png') }}"/>
                     </div>
-                @endif
+                  @endif  
                   </div>
               </div>
               <div thumbsSlider="" class="swiper productDetailSwiperthumb">
                 <div class="swiper-wrapper">
-                  @if (isset($product->getProductPhotos))
+                  @if (isset($product->getProductPhotos)) 
                     @foreach ($product->getProductPhotos as $p)
                     <div class="swiper-slide border-0">
                       <img src="{{ asset($p->image)}}"/>
@@ -236,7 +250,7 @@
                   <div class="swiper-slide border-0">
                       <img src="{{ asset('images/assets/default_product.png')}}"/>
                     </div>
-                  @endif
+                  @endif 
                 </div>
               </div>
   
@@ -244,30 +258,39 @@
       </div>
       <div class="col-12 col-md-6 product-detail-info">
         <h4 class="product-title d-flex align-items-center align-self-center">{{ $product->title }} <div class="sn-instock d-block d-md-none ms-3" style="font-size: 14px;">Instock 2</div></h4>
-        <div class="product-price my-2">${{ $product->price }}</div>
+        <div class="product-price my-2">$&nbsp;{{ $product->price }}</div>
         @if ($product->stock == 1)
-          <div class="sn-instock d-none d-md-block mb-3">Instock 2</div>
+          <div class="sn-instock d-none d-md-block mb-3">Instock @if ($product->count > 0 )
+          {{ $product->count }} @endif
+          </div>
         @else
-          <div class="sn-instock d-none d-md-block mb-3 bg-danger">Out Of Stock</div>
+          <div class="sn-outstock d-none d-md-block mb-3 bg-danger">Out Of Stock</div>
         @endif
         
-      
-        <div class="input-group sn-quantity">
-          <span class="input-group-btn">
-              <button type="button" class="quantity-left-minus"  data-type="minus" data-field="">
-                <span class=""> - </span>
-              </button>
-          </span>
-          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-          <span class="input-group-btn">
-              <button type="button" class="quantity-right-plus" data-type="plus" data-field="">
-                  <span> + </span>
-              </button>
-          </span>
-        </div>
+       @if(session('cart'))
+          @foreach (session('cart') as $id => $details)
+            @if($details['name'] == $product->title )
+              <div class="input-group sn-quantity">
+                <span class="input-group-btn">
+                    <button type="button" class="quantity-left-minus"  data-type="minus" data-field="">
+                      <span class=""> - </span>
+                    </button>
+                </span>
+                <input type="text" id="quantity" name="quantity" class="form-control " value="{{ $details['quantity'] }}" min="1" max="100">
+                <span class="input-group-btn">
+                    <button type="button" class="quantity-right-plus" data-type="plus" data-field="">
+                        <span> + </span>
+                    </button>
+                </span>  
+              </div>
+             @endif
+          @endforeach
+        @endif
         <div class="sn-buy-buttons d-flex">
           <button class="buy-it-now">Buy It Now</button>
+          <a href="{{ route('add.to.cart',$product->id )}}">
           <button class="add-to-cart">Add to cart</button>
+          </a>
         </div>
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
@@ -311,30 +334,20 @@
             <img src="{{ asset('images/assets/default_product.png')}}" alt="" class="sn-product-image w-100">
             @endif
           </a>
-          <div class="text-center product-price">${{ $r->price }}</div>
+          <div class="product-title text-center mb-2">
+            {{ $r->title }}
+          </div>
+          <div class="text-center product-price">$&nbsp;{{ $r->price }}</div>
         </div>
         @empty
-          
         @endforelse
         
-        <!-- <div class="sn-specific-product position-relative mb-3">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <div class="text-center product-price">$2500</div>
-        </div>
-        <div class="sn-specific-product position-relative mb-3">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <div class="text-center product-price">$2500</div>
-        </div>
-        <div class="sn-specific-product position-relative mb-3">
-          <a href="{{ url('/product_detail/1') }}" class="text-decoration-none"><img src="{{ asset('images/products/samsung.png')}}" alt="" class="sn-product-image w-100"></a>
-          <div class="text-center product-price">$2500</div>
-        </div> -->
       </div>
     </div>
   </div>
 </section>
 @endsection
-@push('script')
+@push('scripts')
 <script>
   window.addEventListener('load', function () {
     var swiper = new Swiper(".productDetailSwiperthumb", {
@@ -351,21 +364,47 @@
             swiper: swiper,
         },
     });
-    var quantitiy=0;
-    $('.quantity-right-plus').click(function(e){ 
+
+    var quantitiy = 0;
+    $('.quantity-right-plus').click(function(e){  
       e.preventDefault();
       var quantity = parseInt($('#quantity').val());
-      $('#quantity').val(quantity + 1);
+      // $('#quantity').val(quantity + 1);
+           $.ajax({
+              url: "{{ route('update.cart') }}",
+              method: "patch",
+              data: {
+                  _token: '{{ csrf_token() }}', 
+                  id: `{{$product->id}}`, 
+                  quantity:  quantity+1
+              },
+              success: function (response) {
+                window.location.reload();
+              }
+          });
     });
 
     $('.quantity-left-minus').click(function(e){
       e.preventDefault();
       var quantity = parseInt($('#quantity').val());
-      if(quantity>1){
-        $('#quantity').val(quantity - 1);
-      }
+            if(quantity>1){
+              $('#quantity').val(quantity - 1);
+                $.ajax({
+                  url: "{{ route('update.cart') }}",
+                  method: "patch",
+                  data: {
+                      _token: '{{ csrf_token() }}', 
+                      id: `{{$product->id}}`, 
+                      quantity:  quantity-1
+                  },
+                  success: function (response) {
+                    window.location.reload();
+                  }
+                });
+            }
+        });
     });
-  })
+
   </script>
 @endpush
 

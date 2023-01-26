@@ -48,12 +48,20 @@ Route::controller(FrontController::class)->group(function(){
 
 Route::controller(FrontendProductController::class)->group(function(){
     Route::get('/products', 'products')->name('products');
-    Route::get('/products/laptops', 'products_laptop')->name('products.laptop');
+    Route::get('/products/all', 'all')->name('products.all');
+    Route::get('/products/phones', 'all_phone')->name('products.all.phone');
+    Route::get('/products/laptops', 'all_laptop')->name('products.all.laptop');
+    Route::get('products/search/', 'products_search')->name('products_search');
+    Route::post('products/filter/', 'products_filter')->name('products.price.filter');
+    Route::get('/products/laptop', 'products_laptop')->name('products.laptop');
     Route::get('/product_detail/{product_id}' ,'product_detail')->name('product_detail');
     Route::get('add-to-cart/{id}', 'addToCart')->name('add.to.cart');
     Route::get('/cart','cart')->name('cart');
     Route::patch('update-cart', 'update')->name('update.cart');
     Route::delete('remove-from-cart', 'remove')->name('remove.from.cart');
+
+    Route::get('favourite/{id}','add_wishlist')->name('add_wishlist');
+    Route::get('favourite_remove/{id}','remove_wishlist')->name('remove_wishlist');
 });
 
 
@@ -62,6 +70,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/home','index')->name('home');
     Route::get('user/changepassword','change_password')->name('change_password');
     Route::get('user/billing_address','address')->name('billing_address');
+    Route::get('user/wishlists','wishlist')->name('wishlist');
     Route::put('user/billing_address/{user}','store_address')->name('billing_address.store');
     Route::post('user/changepasswordstore','change_password_store')->name('change_password.store');
     Route::post('/user/update/{id}', 'user_update')->name('user.update');
@@ -72,8 +81,10 @@ Route::group(['prefix'=>'store-admin','as'=>'store_admin.'],function(){
     Route::group(['middleware'=>['auth:web']],function(){
         Route::controller(AdminController::class)->group(function(){
             Route::get('/dashboard','index')->name('dashboard');
-            Route::get('/users/list','users_list')->name('users.list');
-            Route::get('/users/list_datatable','get_admin_list_datatable')->name('get_admin_list.datatable');
+            Route::get('/admin/lists','admin_lists')->name('admin.list');
+            Route::get('/users/lists','user_lists')->name('users.list');
+            Route::get('/admin/list_datatable','get_admin_list_datatable')->name('get_admin_list.datatable');
+            Route::get('/users/list_datatable','get_user_list_datatable')->name('get_user_list.datatable');
             Route::get('/users/create','create')->name('user.create');
         });
     });
@@ -88,10 +99,16 @@ Route::group(['prefix'=>'store-admin','as'=>'store_admin.'],function(){
         Route::controller(ProductController::class)->group(function(){
             Route::get('/product/list','index')->name('product.list');
             Route::get('/product/creat','create')->name('product.create');
+            Route::get('/product/all','get_all_products_datatable')->name('product.get_all_products_datatable');
+            Route::get('/color/creat','color_create')->name('color.create');
+            Route::post('/color/store','color_store')->name('color.store');
             Route::post('/product/store','store')->name('product.store');
             Route::get('/product/edit/{id}','edit')->name('product.edit');
             Route::put('/product/update/{id}','update')->name('product.update');
             Route::delete('/product/delete/{id}','destroy')->name('product.delete');
+            Route::get('/product/trash','trash')->name('product.trash');
+            Route::get('/product/restore/{id}','restore')->name('product.restore');
+            Route::delete('/product/force_delete/{id}','forceDelete')->name('product.force_delete');
         });
     });
 

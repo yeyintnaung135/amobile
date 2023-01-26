@@ -1,91 +1,48 @@
 @extends('backend.layout.app')
-@section('title','A Mobile | Products List')
+@section('title','A Mobile | Users List')
 @push('style')
-<style>
-    .image{
-        width: 70px;
-    }
-    @media screen and (max-width: 972px) {
-        .mobile{
-            display: none;
+    <style>
+        .product-image{
+            width: 95px;
+            height: 90px;
         }
-    }
-</style>
-    
+
+        @media screen and (max-width: 485px) {
+            .product-image{
+               width: 45px;
+               height: 40px;
+            }
+
+        }
+    </style>
 @endpush
 @section('content')
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-12  mt-4">
+        <div class="row">
+            <div class="col-12 mt-4">
                 <!-- card start  -->
                 <div class="card">
                     <div class="card-header">
                        <div class="d-flex justify-content-between">
-                          <span>Product Lists</span>
+                          <span>  <i class="nav-icon fas fa-chart-pie"></i> Product Lists</span>
                           <a href="{{ route('store_admin.product.create') }}" class="btn btn-sm btn-primary">Create Product</a>
                        </div>
                     </div>
                     <div class="card-body">
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table id="productsTable" class="table table-borderless">
+                            <thead>
                                 <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col" class="mobile" >Image</th>
-                                <th scope="col">Price</th>
-                                <th scope="col" class="mobile">Description</th>
-                              
-                             
-                                <th scope="col">
-                                   action
-                                </th>
+                                    <td>id</td>
+                                    <td>Title</td>
+                                    <td>Image</td>
+                                    <td>Price</td>
+                                    <td>Stock</td>
+                                    <td>Count</td>
+                                    <td>Action</td>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @php
-                                    $id = 1;
-                                @endphp
-                                @forelse ($products as $p)
-                                <tr>
-                                  <td scope="row">{{ $id++ }}</td>
-                                  <td scope="row">{{ $p->title }}</td>
-                                   <td class="mobile">
-                                     <div class="image">
-                                     @if ($p->Onephoto->image)
-                                        <img src="{{ asset($p->OnePhoto->image)}}" alt="" class="w-100"> 
-                                    @else
-                                        <span> - </span>
-                                    @endif
-                                     </div>
-                                   </td>
-                                  <td scope="row">$ {{ $p->price }}</td>
-                                  <td scope="row" class="mobile">{!! $p->description !!}</td>
-                                
-                                   <td class="d-flex">
-                                       <a href="{{ route('store_admin.product.edit',$p->id )}}" class="btn btn-info btn-sm mr-2"> <i class="fas fa-edit"></i></a>
-                                       <form action="{{ route('store_admin.product.delete',$p->id )}}" method="post" id="productDelete" >
-                                            @csrf
-                                            @method('DELETE')
-                                       </form>
-                                       <button type="submit" form="productDelete" onclick="return confirm('Are you sure you want to delete this product?');" class="btn btn-danger btn-sm">
-                                       <i class="fas fa-trash"></i> 
-                                       </button>
-                                   </td>
-                                </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">
-                                            <span>There is no product</span>
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                            </table>
-
+                        </table>
                     </div> <!---- Card Body end --->
-                    <div class="card-footer">
-                       <!-- {{ $products->links() }} -->
-                    </div>
                 </div>
                 <!-- card end  -->
             </div>
@@ -94,6 +51,98 @@
 @endsection
 @push('script')
     <script>
-      
+        $('#productsTable').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+              'url': "{{ route('store_admin.product.get_all_products_datatable') }}",
+          },
+          columns: [
+              {data: 'id'},
+              {data: 'title'},
+              {
+                data: 'image',
+                render: function(data, type) {
+                    console.log(data)
+                    var img =  `<img src="{{ asset(':img') }}" class="product-image rounded-2">`;
+                    img=img.replace(':img', data);
+                    return img;
+                }
+            
+              },
+              { data: 'price' },
+              {
+                data: 'stock',
+                render: function(data, type) {
+                    if(data == 1){
+                      var stock = `<span class="badge badge-success">In Stock</span>`;
+                    }else{
+                        var stock = `<span class="badge badge-danger">Out Of Stock</span>`;
+                    }
+        
+                    return  stock;
+                }
+            
+               },
+              {data: 'count'},
+              {
+                data: 'action',
+                render: function(data, type) {
+                    var edit = `<a href="{{ route('store_admin.product.edit',':id') }}" type="button" class="mr-3 btn btn-info btn-sm ">
+                                   <i class="fa fa-edit"></i>
+                               </a>`;
+                    var del = ` <form action="{{ route('store_admin.product.delete',':id')}}" method="post" id="deleteForm">
+                               @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure')"><i class="fa fa-trash"></i></button>
+                              </form>
+                    `;
+                  
+                    edit=edit.replace(':id', data);
+                    del=del.replace(':id', data);
+                    return  `
+                       <div class="w-100 d-flex">
+                       ${edit}  ${del}
+                       </div>
+                      `;
+                }
+              },
+              {data: 'created_at'},
+          ],
+
+          responsive: true,
+          lengthChange: true,
+          autoWidth: false,
+          paging: true,
+          dom: 'Blfrtip',
+          buttons: ["copy", "csv", "excel", "pdf", "print"],
+          columnDefs: [
+              { responsivePriority: 1, targets: 1 },
+              { responsivePriority: 2, targets: 2 },
+              { responsivePriority: 3, targets: 3},
+              { responsivePriority: 4, targets: 4},
+              {
+                  'targets': [4],
+                  'orderable': false,
+              },
+              {
+                  'targets': [7],
+                  'orderable': false,
+                   'visible': false,
+                   'searchable': false,  
+              },
+            
+          ],
+          language: {
+              "search" : '<i class="fas fa-search"></i>',
+              "searchPlaceholder": 'Search',
+              paginate: {
+                  next: '<i class="fa fa-angle-right"></i>', // or '→'
+                  previous: '<i class="fa fa-angle-left"></i>' // or '←'
+              }
+          },
+
+          "order": [[ 7, "desc" ]],
+      });
     </script>
 @endpush

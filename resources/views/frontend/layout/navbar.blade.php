@@ -1,4 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<div class="w-100 bg-blue search">
+  <div class="row justify-content-center align-items-center  search-bar-row p-3">
+      <div class="col-12 col-lg-9 d-flex justify-content-between align-items-center">
+        <h1 class="text-light font-weight-bolder  mx-lg-3 mt-3 search-title">Search</h1>
+        <div class="w-100">
+          <form class="form-inline" action="{{ route('products_search')}}" method="Get.">
+            <div class="input-group input-group-sm">
+              <input name="search" value="{{ old('search')}}" class="form-control form-control-navbar border-0 shadow-0 rounded-0" type="text" placeholder="" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <span class="fas fa-search"></span>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <span class="fas fa-times"></span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-gray fixed-top">
   <div class="nav-row container-fluid">
     <div class="d-flex align-items-center">
       <button class="navbar-toggler  collapsed d-flex d-lg-none flex-column justify-content-around" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +36,7 @@
       </div>
     </div>
     <div class="nav-right-mobile">
-        <a class="nav-item" href="#contact"><i class="fas fa-search"></i></a>
+    <a class="nav-item search-box" ><i class="fas fa-search"></i></a>
         <a class="nav-item position-relative" href="{{ route('cart')}}">
              <i class="fas fa-shopping-cart"></i>
              @if ( count((array) session('cart')) > 0)
@@ -54,7 +76,7 @@
           
         </ul>
         <div class="nav-right">
-          <a class="nav-item" href="#contact"><i class="fas fa-search"></i></a>
+          <a class="nav-item search-box" ><i class="fas fa-search"></i></a>
           <a class="nav-item position-relative" href="{{ route('cart')}}">
              <i class="fas fa-shopping-cart"></i>
              @if (count((array) session('cart')) > 0)
@@ -92,5 +114,6 @@
     </div>
   </div>
 </nav>
+
 
  

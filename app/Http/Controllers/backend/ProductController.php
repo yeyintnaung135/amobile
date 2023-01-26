@@ -7,8 +7,8 @@ use App\Models\ProductPhoto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-use App\Http\Controllers\traid\FileUpload;
 use App\Http\Controllers\traid\UserRole;
+use App\Http\Controllers\traid\FileUpload;
 
 class ProductController extends Controller
 {
@@ -21,10 +21,73 @@ class ProductController extends Controller
     public function index()
     {
         if($this->isSuperAdmin() || $this->isStaff()){
-            $products = Product::with('getProductPhotos')->latest()->paginate(10);
+            $products = Product::with('getProductPhotos')->latest()->paginate(50);
             return view('backend.products.all',compact('products'));
         }
         
+    }
+
+    public function get_all_products_datatable(request $request)
+    {
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // total number of rows per page
+  
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+  
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+  
+        $totalRecords = Product::select('count(*) as allcount')
+                        ->where(function ($query) use($searchValue) {
+                          $query->where('title', 'like', '%' . $searchValue . '%')
+                                ->orWhere('created_at', 'like', '%' . $searchValue . '%');
+                                
+                        })->count();
+                      
+        $totalRecordswithFilter = $totalRecords;
+  
+        $records = Product::orderBy($columnName, $columnSortOrder)
+            ->orderBy('created_at', 'desc')
+            ->where(function ($query) use($searchValue) {
+              $query->where('title', 'like', '%' . $searchValue . '%')
+                    ->orWhere('created_at', 'like', '%' . $searchValue . '%');
+                
+            })
+            // ->whereBetween('created_at', [$searchByFromdate, $searchByTodate])
+            ->select('products.*')
+            // ->withTrashed()
+            ->skip($start)
+            ->take($rowperpage)
+            ->get();
+  
+        $data_arr = array();
+  
+        foreach ($records as $record) {
+          $data_arr[] = array(
+              "id"=>$record->id,
+              "title" => $record->title,
+              "image" => $record->OnePhoto->image,
+              "price" => $record->price,
+              "stock" => $record->stock,
+              "count" => $record->count,
+              "action" => $record->id,
+              "created_at" => $record->created_at,
+          );
+        }
+  
+        $response = array(
+          "draw" => intval($draw),
+          "iTotalRecords" => $totalRecords,
+          "iTotalDisplayRecords" => $totalRecordswithFilter,
+          "aaData" => $data_arr,
+        );
+        echo json_encode($response);
     }
 
     /**
@@ -51,6 +114,7 @@ class ProductController extends Controller
             'title' => 'required|max:100',
             'price' => 'required|integer',
             'stock' => 'required',
+            'count' => 'required|integer',
         ]);
         
         $folderPath = 'images/products/';
@@ -58,6 +122,7 @@ class ProductController extends Controller
         $product->title = $request->title;
         $product->price = $request->price;
         $product->stock = $request->stock;
+        $product->count = $request->count;
         $product->cat_id = $request->cat_id;
         $product->description = $request->description;
         $product->specification = $request->specification;
@@ -130,6 +195,7 @@ class ProductController extends Controller
         $request->validate([
             'title' => 'required|max:100',
             'price' => 'required|integer',
+            'count' => 'required|integer',
             'description' => 'required',
         ]);
 
@@ -138,6 +204,7 @@ class ProductController extends Controller
         $product->title = $request->title;
         $product->price = $request->price;
         $product->stock = $request->stock;
+        $product->count = $request->count;
         $product->cat_id = $request->cat_id;
         $product->description = $request->description;
         $product->specification = $request->specification;
@@ -192,13 +259,7 @@ class ProductController extends Controller
     {
         $photo = ProductPhoto::where('product_id',$id)->get();
         foreach($photo as $f){
-            // if($f->image){
-            //     if(File::exists(public_path($f->image))){
-            //         File::delete(public_path($f->image));
-            //     }
-               
-            // }
-            $f->forceDelete();
+            $f->delete();
         }
       
         Product::findOrFail($id)->delete();
@@ -206,4 +267,41 @@ class ProductController extends Controller
         return redirect()->back()->with('success', "Product Delete Successfully!");
 
     }
+
+    public function trash()
+    {
+        $products = Product::onlyTrashed()->with('getProductPhotos')->get();
+        return view('backend.products.trash',compact('products'));
+    }
+
+    public function restore($id)
+    
+    {
+        $photo = ProductPhoto::where('product_id',$id)->onlyTrashed()->get();
+        foreach($photo as $f){
+            $f->restore();
+        }
+        Product::onlyTrashed()->find($id)->restore();
+        // Session::flash('message', 'Your Product was restore');
+        return redirect(url('store-admin/product/list'))->with('success','Product was restore success');
+          
+    }
+
+    public function forceDelete($id)
+    {
+        $photo = ProductPhoto::where('product_id',$id)->onlyTrashed()->get();
+        foreach($photo as $f){
+            if($f->image){
+                if(File::exists(public_path($f->image))){
+                    File::delete(public_path($f->image));
+                }
+               
+            }
+            $f->forceDelete();
+        }
+        Product::onlyTrashed()->find($id)->forceDelete();
+        // Session::flash('message', 'Your Product was restore');
+        return redirect(url('store-admin/product/list'))->with('success','Product was deleted success');
+    }
+
 }

@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-
+@section('title','A-Mobile | Contact us')
 @push('style')
 <style>
   a:hover {
@@ -52,7 +52,9 @@
   }
   /* Tablet */
   @media (max-width: 767px) {
-    
+    .contact-banner-container{
+      display:none;
+    }
   }
 
   /* Mobile */
@@ -66,29 +68,31 @@
 <section class="row justify-content-center px-3 px-lg-5 py-5">
   <div class="container">
     <div class="row sn-contact">
-      <div class="col-sm col-md-6 mb-4 pe-5">
-        <h3>Contact Us</h3>
-        <p class="text-secondary">Our Friendly team would love to hear from you!</p>
-        <form action="" class="mt-4">
-          @csrf
-          <div class="form-group mb-3">
-            <label for="phone" class="bold">Phone Number</label>
-            <input type="number" class="form-control mt-1 bg-white" id="phone" aria-describedby="" placeholder="">
-          </div>
-          <div class="form-group mb-3">
-            <label for="email" class="bold">Email</label>
-            <input type="email" class="form-control mt-1 bg-white" id="email" aria-describedby="" placeholder="">
-          </div>
-          <div class="form-group mb-3">
-            <label for="address" class="bold">Address</label>
-            <textarea class="form-control mt-1 bg-white" id="address" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn contact-button mt-2">Submit</button>
-        </form>
+      <div class="col-12 d-flex justify-content-center col-md-6 mb-2">
+        <div class="w-100">
+          <h3>Contact Us</h3>
+              <p class="text-secondary">Our Friendly team would love to hear from you!</p>
+              <form action="" class="mt-4">
+                @csrf
+                <div class="form-group mb-3">
+                  <label for="phone" class="bold">Phone Number</label>
+                  <input type="number" class="form-control mt-1 bg-white" id="phone" aria-describedby="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                  <label for="email" class="bold">Email</label>
+                  <input type="email" class="form-control mt-1 bg-white" id="email" aria-describedby="" placeholder="">
+                </div>
+                <div class="form-group mb-3">
+                  <label for="address" class="bold">Address</label>
+                  <textarea class="form-control mt-1 bg-white" id="address" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn contact-button mt-2">Submit</button>
+              </form>
+        </div>
       </div>
       <div class="col-sm col-md-6 mb-4 ps-2 ">
         <div class="position-relative contact-banner-container">
-          <img src="{{ asset('images/assets/contact.jpeg')}}" alt="" class="contact-banner">
+          <img src="{{ asset('images/assets/contact.png')}}" alt="" class="contact-banner">
           <div class="overlay"></div>
         </div>
       </div>

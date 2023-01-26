@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title')</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/logos/logo.png')}}">
         
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,6 +15,9 @@
         <!-- Link Swiper's CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
 
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+       
         <!-- app -->
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
         <link rel="stylesheet" href="{{asset('css/fancybox.css')}}">
@@ -31,6 +35,79 @@
 
             a:hover{
                 color:#000;
+            }
+
+            form i {
+                position: absolute;
+                bottom :14px;
+                right: 10px;
+                cursor: pointer;
+            }
+           
+            .bg-gray{
+                background-color: #f0f0f0;
+            }
+            .search-box{
+                cursor: pointer;
+            }
+
+            .search{
+                height: 200px;
+                width: 100%;
+                background-color: #0b1c35;
+                z-index: 10000;
+                position: fixed;
+                display: none;
+            }
+
+            .search-bar-row{
+                height: 200px;
+            }
+
+            .search-title{
+                font-size: 20px;
+            }
+
+            .form-control-navbar{
+                background-color: #0b1c35;
+                color:#fff;
+                border-bottom: 1px solid #6a737b !important;
+            }
+
+            .form-control-navbar:focus {
+                color:#fff;
+                background-color:  #0b1c35 !important;
+                border-bottom: 1px solid #ffffff !important;
+                outline: 0;
+                box-shadow: 0 0 0 0 !important;
+            }
+
+            .form-control-navbar{
+                width: 100%;
+            }
+            .input-group-append {
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .btn-navbar{
+                color: #fff;
+                font-size: 15px;
+            }
+
+            .btn-navbar:hover{
+                color: #fff;
+            }
+
+            .fa-times{
+                font-size: 19px;
+                transition: 0.5s;
+            }
+
+            .fa-times:hover{
+                transform: rotate(90deg);
             }
 
             .nav-row{
@@ -187,7 +264,7 @@
             }
 
             .top{
-                height: 85px;
+                height: 75px;
                 /* background-color: #000; */
             }
 
@@ -212,7 +289,12 @@
                 color:#fff;
             }
 
+
             @media screen and (max-width: 991px) {
+                .top{
+                   height: 65px;
+                }
+
                 .nav-right{
                     display: none;
                 }
@@ -248,7 +330,21 @@
             }
         
             @media screen and (max-width: 564px) {
-
+                .search{
+                   height: 150px;
+                }
+                .search-bar-row{
+                   height: 125px;
+                }
+                .search-title{
+                  font-size: 15px;
+                }
+                .fa-times{
+                 font-size: 18px;
+                }
+                .btn-navbar{
+                    font-size: 15px;
+                }
                 .footer{
                     height: 250px;
                     background-color: #101d30;
@@ -258,6 +354,7 @@
                     background-repeat: no-repeat;
                 }
             }
+
         </style>
         @stack('style')
     </head>
@@ -278,33 +375,20 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <!-- jQuery -->
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-    <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <script src="{{ asset('js/app.js')}}"></script>
     <script src="{{ asset('js/fancybox.js')}}"></script>
     <script src="{{ asset('js/swiper-bundle.min.js')}}"></script>
-   
-    <script>
-        // window.onscroll = function() {scrollFunction()};
-
-        // function scrollFunction() {
-        //     if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        //         document.getElementById("navbar").style.height = "100px";
-        //         document.getElementById("logo").style.padding = "1px";
-        //     } else {
-        //         document.getElementById("navbar").style.height = "90px";
-        //         document.getElementById("logo").style.padding = "5px";
-    
-        //     }
-        // }
-
-        function myDropFunction() {
-            document.getElementById("aMobileDropdown").classList.toggle("show");
-                
-        }
-
-    </script>
      @stack('scripts')
+     <script>
+        $(".search-box").on('click',function(){
+           $('.search').slideDown()
+        });
+
+        $(".fa-times").on("click",function(){
+            $(".search").slideUp();
+        });
+     </script>
 </html>
 
     

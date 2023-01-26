@@ -18,6 +18,36 @@
         justify-content: center;
         align-items: center;
     }
+
+    .asterisk_input::after {
+            content:" *"; 
+            color: #e32;
+            position: absolute; 
+            top: 10;
+            /* margin: 0px 0px 0px -20px; 
+            font-size: xx-large; 
+            padding: 0 5px 0 0;  */
+        }
+        #variableProductDiv{
+            transition: 3s;
+        }
+        .upload{
+            display: inline-block;
+            background-color: #17a2b8;
+            color: white;
+            padding: 0.5rem;
+            font-family: sans-serif;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            /* margin-top: 1rem; */
+          }
+        .cat-show-img{
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .cat-img{
+            width: 80px !important;
+        }
     </style>
 @endpush
 @section('content')
@@ -35,113 +65,120 @@
                     <div class="card-body">
                         <div class="form-row">
                             <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                            <label for="productTitle">Title</label>
-                            <input type="text" name="title" class="form-control @error('title')
-                                is-invalid
-                            @enderror" id="productTitle">
-                            @error('title')
-                                <span class="font-weight-bolder text-danger">{{ $message}}</span>
-                            @enderror
+                                <div class="form-group">
+                                <label for="productTitle">Title</label>
+                                    <input type="text" name="title" class="form-control @error('title')
+                                        is-invalid
+                                    @enderror" id="productTitle">
+                                    @error('title')
+                                        <span class="font-weight-bolder text-danger">{{ $message}}</span>
+                                    @enderror
                             
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="text" name="price" class="form-control @error('price')
-                                is-invalid
-                            @enderror" id="price">
-                            @error('price')
-                                <span class="font-weight-bolder text-danger">{{ $message}}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Stock</label>
-                            <select class="form-control @error('stock')
-                                is-invalid
-                            @enderror" name="stock" id="category">
-                                <option value="1">In Stock</option>
-                                <option value="0">Out Of Stock</option>
-                            </select>
-                            @error('stock')
-                                <span class="font-weight-bolder text-danger">{{ $message}}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Category</label>
-                            <select class="form-control @error('cat_id')
-                                is-invalid
-                            @enderror" name="cat_id" id="category">
-                                <option value="1">Phone</option>
-                                <option value="0">laptop</option>
-                            </select>
-                            @error('cat_id')
-                                <span class="font-weight-bolder text-danger">{{ $message}}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" name="description" id="description" rows="10"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="specification">Specification</label>
-                            <textarea class="form-control" name="specification" id="specification" rows="10"></textarea>
-                        </div>
-
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Price</label>
+                                    <input type="text" name="price" class="form-control @error('price')
+                                        is-invalid
+                                    @enderror" id="price">
+                                    @error('price')
+                                        <span class="font-weight-bolder text-danger">{{ $message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="category">Stock</label>
+                                    <select class="form-control @error('stock')
+                                        is-invalid
+                                    @enderror" name="stock" id="category">
+                                        <option value="1">In Stock</option>
+                                        <option value="0">Out Of Stock</option>
+                                    </select>
+                                    @error('stock')
+                                        <span class="font-weight-bolder text-danger">{{ $message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="stockCount">Count</label>
+                                    <input type="text" name="count" class="form-control @error('count')
+                                        is-invalid
+                                    @enderror" id="stockCount">
+                                    @error('count')
+                                        <span class="font-weight-bolder text-danger">{{ $message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select class="form-control @error('cat_id')
+                                        is-invalid
+                                    @enderror" name="cat_id" id="category">
+                                        <option value="1">Phone</option>
+                                        <option value="0">laptop</option>
+                                    </select>
+                                    @error('cat_id')
+                                        <span class="font-weight-bolder text-danger">{{ $message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" name="description" id="description" rows="10"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="specification">Specification</label>
+                                    <textarea class="form-control" name="specification" id="specification" rows="10"></textarea>
+                                </div>
                             </div> <!-- col-end -->
                             <div class="col-12 col-lg-6">
-
-                        <!-- drop Zone Section  -->
-                        <div class="form-group">
-                            <h6 class="text-center">Product Photo Upload</h6>
-                            <section>
-                                <div id="dropzone">
-                                <form class="dropzone needsclick" id="demo-upload" action="/upload">
-                                <div class="dz-message needsclick">    
-                                <i class="fas fa-upload"></i>
-                                 
-                                </div>
-                                </form>
-                                </div>
-                            </section>
-                            <br/>
-                            <div id="preview-template" style="display: none;">
-                                    <div class="dz-preview dz-file-preview">
-                                        <div class="dz-image">
-                                           <img data-dz-thumbnail="" class="w-100">
+                                <!-- drop Zone Section  -->
+                                <div class="form-group mb-4">
+                                    <h6 class="text-center">Product Photo Upload</h6>
+                                    <section>
+                                        <div id="dropzone">
+                                        <form class="dropzone needsclick" id="demo-upload" action="/upload">
+                                        <div class="dz-message needsclick">    
+                                        <i class="fas fa-upload"></i>
+                                        
                                         </div>
-                                    <div class="dz-details">
-                                    <div class="dz-size"><span data-dz-size=""></span></div>
-                                    <div class="dz-filename"><span data-dz-name=""></span></div></div>
-                                    <div class="dz-progress"><span class="dz-upload" 
-                                    data-dz-uploadprogress=""></span></div>
-                                    <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
-                                    <div class="dz-success-mark">
-                                    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                                        <title>Check</title>
-                                        <desc>Created with Sketch.</desc>
-                                        <defs></defs>
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                                            <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
-                                        </g>
-                                    </svg>
+                                        </form>
+                                        </div>
+                                    </section>
+                                    <br/>
+                                    <div id="preview-template" style="display: none;">
+                                            <div class="dz-preview dz-file-preview">
+                                                <div class="dz-image">
+                                                <img data-dz-thumbnail="" class="w-100">
+                                                </div>
+                                            <div class="dz-details">
+                                            <div class="dz-size"><span data-dz-size=""></span></div>
+                                            <div class="dz-filename"><span data-dz-name=""></span></div></div>
+                                            <div class="dz-progress"><span class="dz-upload" 
+                                            data-dz-uploadprogress=""></span></div>
+                                            <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+                                            <div class="dz-success-mark">
+                                            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                                <title>Check</title>
+                                                <desc>Created with Sketch.</desc>
+                                                <defs></defs>
+                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                                    <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+                                                </g>
+                                            </svg>
+                                            </div>
+                                            <div class="dz-error-mark">
+                                            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                                <title>error</title>
+                                                <desc>Created with Sketch.</desc>
+                                                <defs></defs>
+                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                                    <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                                                        <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                            </div>
                                     </div>
-                                    <div class="dz-error-mark">
-                                    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                                        <title>error</title>
-                                        <desc>Created with Sketch.</desc>
-                                        <defs></defs>
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                                            <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
-                                                <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    </div>
+                                </div>
                             </div>
                         </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
+                        <div class="form-group w-100 text-center text-lg-left">
                             <button class="btn btn-primary" id="createProduct">Create</button>
                         </div>
                     </div> <!---- Card Body end --->
@@ -154,12 +191,17 @@
 @push('script')
     <script>
         let base64data = [];
+        let terms = [];
+        let termPhotos = [];
+        $('#variableProductDiv').hide();
         $('#description').summernote({
             height: 200  
         });
         $('#specification').summernote({
             height: 200  
         });
+
+
         var dropzone = new Dropzone('#demo-upload', {
                     previewTemplate: document.querySelector('#preview-template').innerHTML,
                     parallelUploads: 2,
@@ -243,10 +285,14 @@
                 title: jQuery("input[name=title]").val(),
                 price : jQuery("input[name=price]").val(),
                 stock : jQuery("select[name=stock]").val(),
+                count : jQuery("input[name=count]").val(),
                 description : jQuery("textarea[name=description]").val(),
                 specification : jQuery("textarea[name=specification]").val(),
-                image : base64data
+                terms: terms,
+                image : base64data,
+                photos : termPhotos
             }
+            
             $.ajax({
                 url: "{{ route('store_admin.product.store')}}",
                 method: "POST",

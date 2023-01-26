@@ -97,9 +97,9 @@
                                     </div>
                                 </td>
                                 <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
-                                <td class="actions d-none d-lg-block mt-4-5" data-th="">
+                                <!-- <td class="actions d-none d-lg-block mt-4-5" data-th="">
                                     <button class="btn btn-danger btn-sm remove-from-cart">Remove From Cart</button>
-                                </td> 
+                                </td>  -->
                             </tr>
                         @empty
                             <tr>
@@ -153,6 +153,7 @@
             e.preventDefault();
             var ele = $(this);
             var number = this.nextElementSibling.textContent++;
+            
             $.ajax({
 
                 url: "{{ route('update.cart') }}",
@@ -181,33 +182,59 @@
             e.preventDefault();
             var ele = $(this);
             var number = this.previousElementSibling.textContent--;
-            $.ajax({
 
-                url: "{{ route('update.cart') }}",
+            if(number <= 1){
+                $.ajax({
 
-                method: "patch",
+                    url: "{{ route('remove.from.cart') }}",
 
-                data: {
+                    method: "DELETE",
 
-                    _token: '{{ csrf_token() }}', 
+                    data: {
 
-                    id: ele.parents("tr").attr("data-id"), 
+                        _token: '{{ csrf_token() }}', 
 
-                    quantity: this.previousElementSibling.textContent
+                        id: ele.parents("tr").attr("data-id")
 
-                },
+                    },
 
-                success: function (response) {
+                    success: function (response) {
 
-                   window.location.reload();
+                        window.location.reload();
 
-                }
-            });
+                    }
+                });
+
+            }else{
+
+                $.ajax({
+
+                    url: "{{ route('update.cart') }}",
+
+                    method: "patch",
+
+                    data: {
+
+                        _token: '{{ csrf_token() }}', 
+
+                        id: ele.parents("tr").attr("data-id"), 
+
+                        quantity: this.previousElementSibling.textContent
+
+                    },
+
+                    success: function (response) {
+
+                    window.location.reload();
+
+                    }
+                });
+                            
+            }
+        
     });
 
-
-
-        $(".remove-from-cart").click(function (e) {
+    $(".remove-from-cart").click(function (e) {
         e.preventDefault();
         var ele = $(this);
 

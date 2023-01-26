@@ -13,23 +13,6 @@
                        </div>
                     </div>
                     <div class="card-body">
-                        <!-- <div class="d-flex justify-content-end my-3 align-items-center">
-                            <div class="form-group mr-md-2">
-                                <fieldset>
-                                <legend>From Date</legend>
-                                <input type="text" id='search_fromdate_customer' class="customerdatepicker form-control" placeholder='Choose date' autocomplete="off"/>
-                                </fieldset>
-                            </div>
-                            <div class="form-group mr-md-2">
-                                <fieldset>
-                                <legend>To Date</legend>
-                                <input type="text" id='search_todate_customer' class="customerdatepicker form-control" placeholder='Choose date' autocomplete="off"/>
-                                </fieldset>
-                            </div>
-                            <div class="pr-md-4">
-                                <input type='button' id="customer_search_button" value="Search" class="btn bg-info"  >
-                            </div>
-                        </div> -->
                         <table id="adminListTable" class="table table-borderless">
                             <thead>
                                 <tr>
@@ -56,16 +39,6 @@
           serverSide: true,
           ajax: {
               'url': "{{ route('store_admin.get_admin_list.datatable') }}",
-            //   method: "POST",
-            //   'data': function(data){
-            //       // Read values
-            //       var from_date = $('#search_fromdate_customer').val() ? $('#search_fromdate_customer').val() + " 00:00:00" : null;
-            //       var to_date = $('#search_todate_customer').val() ? $('#search_todate_customer').val() + " 23:59:59" : null;
-
-            //       // Append to data
-            //       data.searchByFromdate = from_date;
-            //       data.searchByTodate = to_date;
-            //   }
           },
           columns: [
               {data: 'id'},

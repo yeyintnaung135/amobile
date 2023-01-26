@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favourite;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
@@ -27,7 +28,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        if(Auth::check() && session()->get('wishlist')){
+            foreach(session()->get('wishlist') as $key){
+                $wishlists =  Favourite::where('user_id',Auth::id())->where('user_id',Auth::id())->get();
+                if(isset($wishlists)){
+                    $wishlist = new Favourite();
+                    $wishlist->product_id = $key;
+                    $wishlist->user_id = Auth::id();
+                    $wishlist->save();
+                }
+              
+            }
+          
+        }
+ 
         if(Auth::user()->role == 2 || Auth::user()->role == 1){
             return redirect('/store-admin/dashboard');
         }else{
@@ -93,5 +107,12 @@ class HomeController extends Controller
         $user->address = $request->address;
         $user->update();
         return redirect()->back()->with('success','Address Create Successfully');
+    }
+
+    public function wishlist()
+    {
+
+        $wishlists = Favourite::where('user_id',Auth::id())->get();
+        return view('frontend.profile.wishlists',compact('wishlists'));
     }
 }

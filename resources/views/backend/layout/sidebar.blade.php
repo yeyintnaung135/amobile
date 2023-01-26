@@ -12,7 +12,7 @@
   <aside class="main-sidebar sidebar-dark-primary sidebar-bg elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="{{ asset('images/logos/admin.png')}}" alt="A Mobile Store Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{ asset('images/logos/logo.png')}}" alt="A Mobile Store Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       @if (isSuperAdmin())
         <span class="brand-text font-weight-light">{{ Auth::user()->name}}(Admin)</span>
       @else
@@ -47,16 +47,23 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ route('store_admin.users.list')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>List</p>
-                  </a>
-                </li>
-                <li class="nav-item">
+              <li class="nav-item">
                   <a href="{{ route('store_admin.user.create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add User</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('store_admin.admin.list')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Admin List</p>
+                  </a>
+                </li>
+               
+                <li class="nav-item">
+                  <a href="{{ route('store_admin.users.list')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>User Lists</p>
                   </a>
                 </li>
               </ul>
@@ -123,10 +130,22 @@
                     <p>All Products</p>
                   </a>
                 </li>
+             {{--   <li class="nav-item">
+                  <a href="{{ route('store_admin.color.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Color</p>
+                  </a>
+                </li> --}}
                 <li class="nav-item">
                   <a href="{{ route('store_admin.product.create')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Add Products</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('store_admin.product.trash')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Trash</p>
                   </a>
                 </li>
               </ul>

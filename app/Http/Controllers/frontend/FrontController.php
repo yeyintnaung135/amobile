@@ -4,8 +4,10 @@ namespace App\Http\Controllers\frontend;
 
 use App\Models\Banner;
 use App\Models\Product;
+use App\Models\Favourite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {

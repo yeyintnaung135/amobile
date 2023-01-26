@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app') --}}
+
 @extends('frontend.layout.app')
 @push('style')
 <style>
@@ -8,6 +8,8 @@
   h3, h4, .bold {
     font-weight: 900 !important;
   }
+
+  
   .semi-bold {
     font-weight: 600 !important;
   }
@@ -87,8 +89,10 @@
 
                         <div class="form-group mb-2">
                             <label for="password" class="col-form-label semi-bold">{{ __('Password') }}</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                           <div class="position-relative">
+                              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                              <i class="fas fa-eye-slash" id="togglePassword" onclick="toggleEye(this)"></i>
+                           </div>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -98,7 +102,10 @@
 
                         <div class="form-group mb-2">
                             <label for="password-confirm" class="col-form-label semi-bold">{{ __('Confirm Password') }}</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="position-relative">
+                               <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                               <i class="fas fa-eye-slash" id="togglePassword" onclick="confirmToggleEye(this)"></i>
+                            </div>
                         </div>
 
                         <button type="submit" class="login-button mt-3">
@@ -111,3 +118,26 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script>
+    function toggleEye(e){
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            $(e).toggleClass('fas fa-eye-slash fas fa-eye');
+    }
+
+    function confirmToggleEye(e){
+        var x = document.getElementById("password-confirm");
+        if (x.type === "password") {
+            x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            $(e).toggleClass('fas fa-eye-slash fas fa-eye');
+    }
+    </script>
+@endpush
